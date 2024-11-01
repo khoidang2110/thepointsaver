@@ -1,5 +1,5 @@
 import React from 'react';
-import { Avatar, Button, Space } from 'antd';
+import { Avatar, Button, Space, Flex } from 'antd';
 import { Card, Col, Row , Image } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 
@@ -27,20 +27,31 @@ const Deals = () => (
         }}
             >Amazon - Echo Show 5 (3Rd Generation) 5.5 Inch Smart Display With Alexa - Cloud Blue</span>
         </div>
-        <div className='flex items-center justify-center '> <p>$51.00</p></div>
-        <div className='flex justify-between'>  
-             <Space wrap size={6}>
+        <div className='flex items-center justify-center text-base '> <p>$51.00</p></div>
+        <div className='flex justify-between items-center'>  
+             <Space wrap size={2}>
         <Avatar shape="square" size={20} icon={<UserOutlined />} />
       <Avatar shape="square" size={20} icon={<UserOutlined />} />
       <Avatar shape="square" size={20} icon={<UserOutlined />} />
-      <Avatar shape="square" size={14} icon={<UserOutlined />} />
-      <Avatar shape="square" size={14} icon={<UserOutlined />} />
+      <Avatar shape="square" size={20} icon={<UserOutlined />} />
+      <Avatar shape="square" size={20} icon={<UserOutlined />} />
+      <Avatar shape="square" size={20} icon={<UserOutlined />} />
+
     </Space>
-    <p>ED 11-08-2024</p>
+    <p className='text-xs'>ED 11-08-2024</p>
     </div>
           </div>
-    <div className='flex'>   <Button type="primary" size='small' block>Commit</Button>
-    <Button size='small' block>View Deal</Button></div>
+    <div className='flex mt-2 justify-around w-full'> 
+        <div className='px-1'>
+        <Button type="primary"  block  className='mx-2 '>Commit</Button>
+
+
+        </div>
+        <div className='px-1'>
+        <Button block   className='mx-2'>View Deal</Button></div>
+
+
+        </div>
 
     </Card>
   </Col>
