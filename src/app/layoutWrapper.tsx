@@ -29,6 +29,8 @@ const LayoutWrapper = ({ children }: { children: React.ReactNode }) => {
     switch (pathname) {
       case '/deals':
         return '2';
+        case '/commitments':
+          return '3';
       default:
         return '1';
     }
@@ -41,6 +43,9 @@ const LayoutWrapper = ({ children }: { children: React.ReactNode }) => {
         break;
       case '/deals':
         setSelectedKey('2');
+        break;
+        case '/commitments':
+        setSelectedKey('3');
         break;
       default:
         setSelectedKey('1');
@@ -55,11 +60,13 @@ const LayoutWrapper = ({ children }: { children: React.ReactNode }) => {
     getItem('Deals', '2', <DollarOutlined />, () => {
       router.push('/deals');
     }),
-    getItem('My Commitments', '3', <LinkOutlined />),
+    getItem('My Commitments', '3', <LinkOutlined />, () => {
+      router.push('/commitments');
+    }),
   ];
 
   // Check if current route is login or register to conditionally render Sider and Header
-  const isAuthRoute = pathname === '/login' || pathname === '/register';
+  const isAuthRoute = pathname === '/login' || pathname === '/register'|| pathname === '/admin';
 
   return (
     <ConfigProvider
