@@ -1,0 +1,144 @@
+$primary: #8cb369;
+$sec: #f4e285;
+$third: #f4a259;
+$four: #5b8e7d;
+$five: #bc4b51;
+$white: white;
+$gray: #c5d7b5;
+
+.sectionDashboard {
+  .name {
+    display: block;
+    font-size: 20px;
+  }
+  .datetime {
+    display: block;
+    font-size: 18px;
+  }
+  .noti {
+    .notiForm {
+      border: 2px solid $four;
+      background-color: $white;
+      border-radius: 12px;
+      padding: 12px;
+    }
+    .mainText {
+      font-size: 16px;
+      color: $primary;
+      margin-bottom: 6px;
+    }
+    .subText {
+      font-size: 14px;
+    }
+  }
+  .statistical {
+    margin: 1rem 0;
+  }
+  .formItem {
+    border-radius: 20px;
+    background-color: $white;
+    padding: 12px;
+    height: 110px;
+    .mainText {
+      font-size: 18px;
+    }
+    .moreItem {
+      margin-top: 0.5rem;
+    }
+    .title {
+      color: $primary;
+      font-size: 14px;
+      display: block;
+    }
+    .money {
+      font-size: 20px;
+      display: block;
+      line-height: 30px !important;
+    }
+    .moneyBig {
+      margin-top: 1.5rem;
+      font-size: 30px;
+      display: block;
+      line-height: 30px !important;
+    }
+  }
+  .full {
+    margin-top: 12px;
+  }
+  .product {
+    .formProduct {
+      background-color: $white;
+      padding: 18px;
+      border-radius: 12px;
+    }
+    .tag {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 0 0 30px 30px !important;
+      background-color: red;
+      color: $white;
+      padding: 0 20px;
+    }
+    .boxImg {
+      margin: auto;
+      width: 220px;
+      height: 150px;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+    }
+    .mainText {
+      font-size: 16px;
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+    .price {
+      color: $primary;
+      font-size: 20px;
+      display: block;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .moreInfo {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+      background-color: $gray;
+      border-radius: 10px;
+      .boxImg {
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+        }
+      }
+    }
+    .button {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 14px;
+    }
+  }
+  .table {
+    margin: 20px 0;
+    background-color: $white;
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .full {
+    .formItem {
+      height: auto;
+    }
+  }
+}
