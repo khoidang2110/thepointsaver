@@ -2,36 +2,17 @@
 import React from "react";
 import styles from "./styles.module.scss";
 import { Col, Row, Flex } from "antd";
-import { ButtonCus } from "./_components";
-import Slider from "react-slick";
 import DataTable from "./_components/DataTable";
+import ProductDetail from "./_components/ProductDetail";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
 
 const Home = () => {
-  var settings = {
-    speed: 500,
-    slidesToShow: 4,
-    responsive: [
-      {
-        breakpoint: 1200,
-        settings: {
-          slidesToShow: 3,
-        },
-      },
-      {
-        breakpoint: 1023,
-        settings: {
-          slidesToShow: 2,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-        },
-      },
-    ],
-  };
-
   const dataNoti = [
     {
       name: "BG Deals Commitment Update",
@@ -43,8 +24,24 @@ const Home = () => {
     },
   ];
 
+  const dataCommitments = [
+    {
+      name: "AMAZON-ECHO-POP-LAVENDER-BLOOM-4804",
+      price: "$55.47",
+      active: true,
+      img: "https://i5.walmartimages.com/asr/fff458b8-4eff-491d-af67-34968fe58531.57b1a2f9f198a430353cf8bde1c1ed80.jpeg?odnHeight=450&odnWidth=450&odnBg=ffffff",
+    },
+    {
+      name: "AMAZON-ECHO-POP-LAVENDER-BLOOM-4804",
+      price: "$1120",
+      active: true,
+      img: "https://i5.walmartimages.com/asr/fff458b8-4eff-491d-af67-34968fe58531.57b1a2f9f198a430353cf8bde1c1ed80.jpeg?odnHeight=450&odnWidth=450&odnBg=ffffff",
+    },
+  ];
+
   const dataProd = [
     {
+      img: "https://i5.walmartimages.com/asr/fff458b8-4eff-491d-af67-34968fe58531.57b1a2f9f198a430353cf8bde1c1ed80.jpeg?odnHeight=450&odnWidth=450&odnBg=ffffff",
       name: "Dualsense Wireless Controller For Playstation 5 - Fortnite Limited Edition",
       price: "$19.00",
       tag: "Below",
@@ -61,6 +58,7 @@ const Home = () => {
       ],
     },
     {
+      img: "https://i5.walmartimages.com/asr/fff458b8-4eff-491d-af67-34968fe58531.57b1a2f9f198a430353cf8bde1c1ed80.jpeg?odnHeight=450&odnWidth=450&odnBg=ffffff",
       name: "Dualsense Wireless Controller For Playstation 5 - Fortnite Limited Edition",
       price: "$19.00",
       tag: "Below",
@@ -77,6 +75,7 @@ const Home = () => {
       ],
     },
     {
+      img: "https://i5.walmartimages.com/asr/fff458b8-4eff-491d-af67-34968fe58531.57b1a2f9f198a430353cf8bde1c1ed80.jpeg?odnHeight=450&odnWidth=450&odnBg=ffffff",
       name: "Dualsense Wireless Controller For Playstation 5 - Fortnite Limited Edition",
       price: "$19.00",
       tag: "Below",
@@ -93,6 +92,7 @@ const Home = () => {
       ],
     },
     {
+      img: "https://i5.walmartimages.com/asr/fff458b8-4eff-491d-af67-34968fe58531.57b1a2f9f198a430353cf8bde1c1ed80.jpeg?odnHeight=450&odnWidth=450&odnBg=ffffff",
       name: "Dualsense Wireless Controller For Playstation 5 - Fortnite Limited Edition",
       price: "$19.00",
       tag: "Below",
@@ -109,6 +109,7 @@ const Home = () => {
       ],
     },
     {
+      img: "https://i5.walmartimages.com/asr/fff458b8-4eff-491d-af67-34968fe58531.57b1a2f9f198a430353cf8bde1c1ed80.jpeg?odnHeight=450&odnWidth=450&odnBg=ffffff",
       name: "Dualsense Wireless Controller For Playstation 5 - Fortnite Limited Edition",
       price: "$19.00",
       tag: "Below",
@@ -125,7 +126,6 @@ const Home = () => {
       ],
     },
   ];
-
   return (
     <div className="App">
       <div className={styles.sectionDashboard}>
@@ -141,12 +141,12 @@ const Home = () => {
             </Col>
           ))}
         </Row>
-        <Row gutter={[16, 16]} className={styles.statistical}>
+        <Row gutter={[16, 16]} className={styles.m1}>
           <Col xs={24} lg={16}>
             <Row gutter={[16, 16]}>
               <Col xs={24} sm={24} md={8} lg={8}>
                 <div className={styles.formItem}>
-                  <span className={styles.mainText}>Orders</span>
+                  <span className={styles.headerText}>Orders</span>
                   <Flex gap="middle" justify="space-between">
                     <div className={styles.moreItem}>
                       <span className={styles.title}>Amount</span>
@@ -161,13 +161,13 @@ const Home = () => {
               </Col>
               <Col xs={24} sm={24} md={8} lg={8}>
                 <div className={styles.formItem}>
-                  <span className={styles.mainText}>Orders</span>
+                  <span className={styles.headerText}>Balance</span>
                   <span className={styles.moneyBig}>$0.00</span>
                 </div>
               </Col>
               <Col xs={24} sm={24} md={8} lg={8}>
                 <div className={styles.formItem}>
-                  <span className={styles.mainText}>Orders</span>
+                  <span className={styles.headerText}>Trackings</span>
                   <span className={styles.moneyBig}>$0.00</span>
                 </div>
               </Col>
@@ -175,7 +175,7 @@ const Home = () => {
             <Row className={styles.full}>
               <Col span={24}>
                 <div className={styles.formItem}>
-                  <span className={styles.mainText}>Orders</span>
+                  <span className={styles.headerText}>Payments</span>
                   <Row>
                     <Col xs={12} sm={12} lg={3} className={styles.moreItem}>
                       <span className={styles.title}>Adjustment</span>
@@ -203,58 +203,75 @@ const Home = () => {
             </Row>
           </Col>
           <Col xs={24} sm={24} md={8} lg={8}>
-            <div className={styles.formItem}>
-              <span className={styles.mainText}>Update</span>
+            <div className={styles.update}>
+              <span className={styles.headerText}>Update</span>
+              <div className={styles.boxNodata}>
+                <img src="/nodata.svg" />
+              </div>
             </div>
           </Col>
         </Row>
-        <Slider {...settings} className={styles.product}>
+        <Swiper
+          spaceBetween={12}
+          slidesPerView={3}
+          onSlideChange={() => console.log("slide change")}
+          onSwiper={(swiper) => console.log(swiper)}
+        >
           {dataProd.map((e, i) => (
-            <Col key={i.toString()} span={22}>
-              {e?.tag && (
-                <div className={styles.tag}>
-                  <span>Below cost</span>
-                </div>
-              )}
-              <div
-                className={styles.formProduct}
-                style={{ borderTop: e?.tag ? `4px solid red` : "none" }}
-              >
-                <div className={styles.boxImg}>
-                  <img src="https://i5.walmartimages.com/asr/fff458b8-4eff-491d-af67-34968fe58531.57b1a2f9f198a430353cf8bde1c1ed80.jpeg?odnHeight=450&odnWidth=450&odnBg=ffffff"></img>
-                </div>
-                <span className={styles.mainText}>{e?.name}</span>
-                <span className={styles.price}>{e?.price}</span>
-                <div className={styles.moreInfo}>
-                  <Flex>
-                    {e?.brand.map((item, i) => (
-                      <div key={i.toString()} className={styles.boxImg}>
-                        <img
-                          key={i.toString()}
-                          src={item?.img}
-                          alt={item?.name}
-                        />
-                      </div>
-                    ))}
-                  </Flex>
-
-                  <span className={styles.time}>{e?.time}</span>
-                </div>
-                <div className={styles.button}>
-                  <ButtonCus color="primary" variant="solid" text="Commit" />
-                  <ButtonCus
-                    color="primary"
-                    variant="outlined"
-                    text="View deal"
-                  />
-                </div>
-              </div>
-            </Col>
+            <SwiperSlide>
+              <ProductDetail data={e} />
+            </SwiperSlide>
           ))}
-        </Slider>
-        <div className={styles.table}>
-          <DataTable />
-        </div>
+        </Swiper>
+
+        <Row gutter={[16, 16]} className={styles.m1}>
+          <Col xs={24} sm={24} md={24} lg={12}>
+            <div className={styles.table}>
+              <span className={styles.headerText}>My Orders</span>
+              <DataTable />
+            </div>
+          </Col>
+          <Col xs={24} sm={24} md={24} lg={12}>
+            {dataCommitments?.map((e, i) => (
+              <div key={i.toString()} className={styles.lastCommit}>
+                <span className={styles.headerText}>Last Commitments</span>
+                <Row className={styles.commitItem}>
+                  <Col xs={8} sm={8} lg={6} xl={5} className={styles.boxImg}>
+                    <img src={e.img}></img>
+                    <div className={styles.tag}>
+                      <span className={styles.redtag}>Exp. 11-30-2024</span>
+                    </div>
+                  </Col>
+                  <Col xs={16} sm={16} lg={11} xl={12}>
+                    <span className={styles.textProduct}>{e.name}</span>
+                    <Flex align="center">
+                      <span className={styles.price}>{e.price}</span>
+                      {e?.active && (
+                        <span className={styles.greentag}>Active</span>
+                      )}
+                    </Flex>
+                  </Col>
+                  <Col
+                    xs={24}
+                    sm={24}
+                    lg={7}
+                    xl={7}
+                    className={styles.moreInfo}
+                  >
+                    <Flex>
+                      <span>Comm.QTY</span>
+                      <span></span>
+                    </Flex>
+                    <Flex>
+                      <span>Comm.QTY</span>
+                      <span></span>
+                    </Flex>
+                  </Col>
+                </Row>
+              </div>
+            ))}
+          </Col>
+        </Row>
       </div>
     </div>
   );

@@ -1,0 +1,89 @@
+$primary: #8cb369;
+$sec: #f4e285;
+$third: #f4a259;
+$four: #5b8e7d;
+$five: #bc4b51;
+$white: white;
+$gray: #c5d7b5;
+$green1: #52c41a;
+$green2: rgb(246, 255, 237);
+$red1: #c5161d;
+$red2: #ffe5e6;
+
+.tagProd {
+  position: absolute;
+  left: 10%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 14px;
+}
+.formProduct {
+  background-color: $white;
+  padding: 18px;
+  border-radius: 12px;
+}
+.tagCost {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 0 0 30px 30px !important;
+  background-color: red;
+  color: $white;
+  padding: 0 20px;
+  font-size: 12px;
+}
+.boxImg {
+  margin: auto;
+  width: 220px;
+  height: 150px;
+  position: relative;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+
+.price {
+  color: $primary;
+  font-size: 20px;
+  display: block;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.moreInfo {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: $gray;
+  border-radius: 10px;
+  .boxImg {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+}
+.button {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 14px;
+}
+
+.greentag {
+  color: $green1;
+  background-color: $green2;
+  padding: 4px 10px;
+  border-radius: 99px;
+}
+
+.redtag {
+  color: $red1;
+  background-color: $red2;
+  padding: 4px 10px;
+  border-radius: 99px;
+}
