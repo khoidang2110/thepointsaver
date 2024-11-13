@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./styles.module.scss";
 import { Col, Row, Flex } from "antd";
 import DataTable from "./_components/DataTable";
@@ -15,6 +15,7 @@ import { useWindowSize } from "./_utils";
 
 const Home = () => {
   const size = useWindowSize();
+  const [sizeWidth, setSizeWidth] = useState<any>();
   const dataNoti = [
     {
       name: "BG Deals Commitment Update",
@@ -200,17 +201,19 @@ const Home = () => {
     },
   ];
 
-  const renderPerView = (value: any) => {
-    if (value > 1200) {
-      return 5;
+  useEffect(() => {
+    if (size.width) {
+      if (size.width > 1200) {
+        setSizeWidth(5);
+      }
+      if (size.width > 900 && size.width < 1200) {
+        setSizeWidth(3);
+      }
+      if (size.width < 900) {
+        setSizeWidth(1);
+      }
     }
-    if (value > 900) {
-      return 3;
-    }
-    if (value < 900) {
-      return 1;
-    }
-  };
+  }, [size.width]);
 
   return (
     <div className="App">
@@ -316,18 +319,21 @@ const Home = () => {
           ))}
         </Row>
         {/* product */}
-        <Swiper
-          spaceBetween={12}
-          slidesPerView={renderPerView(size.width)}
-          onSlideChange={() => console.log("slide change")}
-          onSwiper={(swiper) => console.log(swiper)}
-        >
-          {dataProd.map((e, i) => (
-            <SwiperSlide key={i.toString()}>
-              <ProductDetail data={e} />
-            </SwiperSlide>
-          ))}
-        </Swiper>
+        {sizeWidth && (
+          <Swiper
+            spaceBetween={12}
+            slidesPerView={sizeWidth}
+            onSlideChange={() => console.log("slide change")}
+            onSwiper={(swiper) => console.log(swiper)}
+          >
+            {dataProd.map((e, i) => (
+              <SwiperSlide key={i.toString()}>
+                <ProductDetail data={e} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        )}
+
         {/* table - commit */}
         <Row gutter={[16, 16]} className={styles.m1}>
           <Col xs={24} sm={24} md={24} lg={12}>

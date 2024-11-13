@@ -27,7 +27,6 @@ function getItem(
 
 const LayoutWrapper = ({ children }: { children: React.ReactNode }) => {
   const size = useWindowSize();
-  console.log("size", size);
   const [open, setOpen] = useState(false);
 
   const showDrawer = () => {
