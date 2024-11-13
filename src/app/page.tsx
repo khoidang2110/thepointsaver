@@ -11,8 +11,10 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
+import { useWindowSize } from "./_utils";
 
 const Home = () => {
+  const size = useWindowSize();
   const dataNoti = [
     {
       name: "BG Deals Commitment Update",
@@ -125,12 +127,97 @@ const Home = () => {
         },
       ],
     },
+    {
+      img: "https://i5.walmartimages.com/asr/fff458b8-4eff-491d-af67-34968fe58531.57b1a2f9f198a430353cf8bde1c1ed80.jpeg?odnHeight=450&odnWidth=450&odnBg=ffffff",
+      name: "Dualsense Wireless Controller For Playstation 5 - Fortnite Limited Edition",
+      price: "$19.00",
+      tag: "Below",
+      time: "ED 11-23-2024",
+      brand: [
+        {
+          name: "Amazon",
+          img: "https://logo.clearbit.com/amazon.com",
+        },
+        {
+          name: "Amazon",
+          img: "https://logo.clearbit.com/amazon.com",
+        },
+      ],
+    },
+    {
+      img: "https://i5.walmartimages.com/asr/fff458b8-4eff-491d-af67-34968fe58531.57b1a2f9f198a430353cf8bde1c1ed80.jpeg?odnHeight=450&odnWidth=450&odnBg=ffffff",
+      name: "Dualsense Wireless Controller For Playstation 5 - Fortnite Limited Edition",
+      price: "$19.00",
+      tag: "Below",
+      time: "ED 11-23-2024",
+      brand: [
+        {
+          name: "Amazon",
+          img: "https://logo.clearbit.com/amazon.com",
+        },
+        {
+          name: "Amazon",
+          img: "https://logo.clearbit.com/amazon.com",
+        },
+      ],
+    },
+    {
+      img: "https://i5.walmartimages.com/asr/fff458b8-4eff-491d-af67-34968fe58531.57b1a2f9f198a430353cf8bde1c1ed80.jpeg?odnHeight=450&odnWidth=450&odnBg=ffffff",
+      name: "Dualsense Wireless Controller For Playstation 5 - Fortnite Limited Edition",
+      price: "$19.00",
+      tag: "Below",
+      time: "ED 11-23-2024",
+      brand: [
+        {
+          name: "Amazon",
+          img: "https://logo.clearbit.com/amazon.com",
+        },
+        {
+          name: "Amazon",
+          img: "https://logo.clearbit.com/amazon.com",
+        },
+      ],
+    },
   ];
+
+  const dataReport = [
+    {
+      img: "https://buyinggroup.com/static/media/dashboard_container_filled.1a79ce62.svg",
+      name: "Add tracking number",
+    },
+    {
+      img: "https://buyinggroup.com/static/media/dashboard_container_filled.1a79ce62.svg",
+      name: "Request Shipping Label",
+    },
+    {
+      img: "https://buyinggroup.com/static/media/dashboard_container_filled.1a79ce62.svg",
+      name: "Request Payment",
+    },
+
+    {
+      img: "https://buyinggroup.com/static/media/dashboard_container_filled.1a79ce62.svg",
+      name: "Payment Details",
+    },
+  ];
+
+  const renderPerView = (value: any) => {
+    if (value > 1200) {
+      return 5;
+    }
+    if (value > 900) {
+      return 3;
+    }
+    if (value < 900) {
+      return 1;
+    }
+  };
+
   return (
     <div className="App">
       <div className={styles.sectionDashboard}>
         <span className={styles.name}>Welcome back, Khoi U-7940</span>
         <span className={styles.datetime}>Tue 12 Nov, 2024</span>
+        {/* noti */}
         <Row gutter={[16, 16]} className={styles.noti}>
           {dataNoti.map((e, i) => (
             <Col key={i.toString()} xs={24} lg={12}>
@@ -141,6 +228,7 @@ const Home = () => {
             </Col>
           ))}
         </Row>
+        {/* report */}
         <Row gutter={[16, 16]} className={styles.m1}>
           <Col xs={24} lg={16}>
             <Row gutter={[16, 16]}>
@@ -211,19 +299,36 @@ const Home = () => {
             </div>
           </Col>
         </Row>
+        {/* what w u like to do */}
+        <Row gutter={[16, 16]} className={`${styles.m1} ${styles.todo}`}>
+          <Col xs={24} sm={24} md={12} lg={4}>
+            <span className={styles.mainText}>What would you like to do?</span>
+          </Col>
+          {dataReport.map((e, i) => (
+            <Col xs={24} sm={24} md={12} lg={5}>
+              <div className={styles.todoItem}>
+                <div className={styles.boxImg}>
+                  <img src={e?.img} />
+                </div>
+                <span>{e?.name}</span>
+              </div>
+            </Col>
+          ))}
+        </Row>
+        {/* product */}
         <Swiper
           spaceBetween={12}
-          slidesPerView={3}
+          slidesPerView={renderPerView(size.width)}
           onSlideChange={() => console.log("slide change")}
           onSwiper={(swiper) => console.log(swiper)}
         >
           {dataProd.map((e, i) => (
-            <SwiperSlide>
+            <SwiperSlide key={i.toString()}>
               <ProductDetail data={e} />
             </SwiperSlide>
           ))}
         </Swiper>
-
+        {/* table - commit */}
         <Row gutter={[16, 16]} className={styles.m1}>
           <Col xs={24} sm={24} md={24} lg={12}>
             <div className={styles.table}>
@@ -232,12 +337,15 @@ const Home = () => {
             </div>
           </Col>
           <Col xs={24} sm={24} md={24} lg={12}>
-            {dataCommitments?.map((e, i) => (
-              <div key={i.toString()} className={styles.lastCommit}>
-                <span className={styles.headerText}>Last Commitments</span>
-                <Row className={styles.commitItem}>
-                  <Col xs={8} sm={8} lg={6} xl={5} className={styles.boxImg}>
-                    <img src={e.img}></img>
+            <div className={styles.lastCommit}>
+              <span className={styles.headerText}>Last Commitments</span>
+              {dataCommitments?.map((e, i) => (
+                <Row key={i.toString()} className={styles.commitItem}>
+                  <Col xs={8} sm={8} lg={6} xl={5}>
+                    <div className={styles.boxImg}>
+                      <img src={e.img}></img>
+                    </div>
+
                     <div className={styles.tag}>
                       <span className={styles.redtag}>Exp. 11-30-2024</span>
                     </div>
@@ -258,18 +366,18 @@ const Home = () => {
                     xl={7}
                     className={styles.moreInfo}
                   >
-                    <Flex>
+                    <Flex justify="space-between">
                       <span>Comm.QTY</span>
-                      <span></span>
+                      <span>3</span>
                     </Flex>
-                    <Flex>
+                    <Flex justify="space-between">
                       <span>Comm.QTY</span>
-                      <span></span>
+                      <span>0</span>
                     </Flex>
                   </Col>
                 </Row>
-              </div>
-            ))}
+              ))}
+            </div>
           </Col>
         </Row>
       </div>

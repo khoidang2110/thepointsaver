@@ -1,8 +1,7 @@
 "use client";
-import React, { Fragment } from "react";
-import styles from "./styles.module.scss";
-import { Col, Row, Flex } from "antd";
+import { Col, Flex } from "antd";
 import { ButtonCus } from "../ButtonCus";
+import styles from "./styles.module.scss";
 
 export default function ProductDetail({ data }: any) {
   return (
