@@ -237,7 +237,12 @@ const Home = () => {
             <Row gutter={[16, 16]}>
               <Col xs={24} sm={24} md={8} lg={8}>
                 <div className={styles.formItem}>
-                  <span className={styles.headerText}>Orders</span>
+                  <Flex align="center">
+                    <div className={styles.boxIcon}>
+                      <img src="https://buyinggroup.com/static/media/all_balances.59192541.svg" />
+                    </div>
+                    <span className={styles.headerText}>Orders</span>
+                  </Flex>
                   <Flex gap="middle" justify="space-between">
                     <div className={styles.moreItem}>
                       <span className={styles.title}>Amount</span>
@@ -252,13 +257,24 @@ const Home = () => {
               </Col>
               <Col xs={24} sm={24} md={8} lg={8}>
                 <div className={styles.formItem}>
-                  <span className={styles.headerText}>Balance</span>
+                  <Flex align="center">
+                    <div className={styles.boxIcon}>
+                      <img src="https://buyinggroup.com/static/media/all_balances.59192541.svg" />
+                    </div>
+                    <span className={styles.headerText}>Balance</span>
+                  </Flex>
+
                   <span className={styles.moneyBig}>$0.00</span>
                 </div>
               </Col>
               <Col xs={24} sm={24} md={8} lg={8}>
                 <div className={styles.formItem}>
-                  <span className={styles.headerText}>Trackings</span>
+                  <Flex align="center">
+                    <div className={styles.boxIcon}>
+                      <img src="https://buyinggroup.com/static/media/all_balances.59192541.svg" />
+                    </div>
+                    <span className={styles.headerText}>Trackings</span>
+                  </Flex>
                   <span className={styles.moneyBig}>$0.00</span>
                 </div>
               </Col>
@@ -266,36 +282,61 @@ const Home = () => {
             <Row className={styles.full}>
               <Col span={24}>
                 <div className={styles.formItem}>
-                  <span className={styles.headerText}>Payments</span>
-                  <Row>
+                  <Flex align="center">
+                    <div className={styles.boxIcon}>
+                      <img src="https://buyinggroup.com/static/media/all_balances.59192541.svg" />
+                    </div>
+                    <span className={styles.headerText}>Payments</span>
+                  </Flex>
+                  <Flex justify="space-between" align="center">
                     <Col xs={12} sm={12} lg={3} className={styles.moreItem}>
                       <span className={styles.title}>Adjustment</span>
-                      <span className={styles.money}>$0.00</span>
+                      <Flex justify="space-between" align="center">
+                        <span className={styles.money}>$0.00</span>
+                        <span className={styles.smallmoney}>$0.00</span>
+                      </Flex>
                     </Col>
                     <Col xs={12} sm={12} lg={3} className={styles.moreItem}>
                       <span className={styles.title}>Requested</span>
-                      <span className={styles.money}>$0.00</span>
+                      <Flex justify="space-between" align="center">
+                        <span className={styles.money}>$0.00</span>
+                        <span className={styles.smallmoney}>$0.00</span>
+                      </Flex>
                     </Col>
                     <Col xs={12} sm={12} lg={3} className={styles.moreItem}>
                       <span className={styles.title}>Processing</span>
-                      <span className={styles.money}>$0.00</span>
+                      <Flex justify="space-between" align="center">
+                        <span className={styles.money}>$0.00</span>
+                        <span className={styles.smallmoney}>$0.00</span>
+                      </Flex>
                     </Col>
                     <Col xs={12} sm={12} lg={3} className={styles.moreItem}>
                       <span className={styles.title}>Paid</span>
-                      <span className={styles.money}>$0.00</span>
+                      <Flex justify="space-between" align="center">
+                        <span className={styles.money}>$0.00</span>
+                        <span className={styles.smallmoney}>$0.00</span>
+                      </Flex>
                     </Col>
                     <Col xs={12} sm={12} lg={3} className={styles.moreItem}>
                       <span className={styles.title}>Sent</span>
-                      <span className={styles.money}>$0.00</span>
+                      <Flex justify="space-between" align="center">
+                        <span className={styles.money}>$0.00</span>
+                        <span className={styles.smallmoney}>$0.00</span>
+                      </Flex>
                     </Col>
-                  </Row>
+                  </Flex>
                 </div>
               </Col>
             </Row>
           </Col>
           <Col xs={24} sm={24} md={8} lg={8}>
             <div className={styles.update}>
-              <span className={styles.headerText}>Update</span>
+              <Flex align="center">
+                <div className={styles.boxIcon}>
+                  <img src="https://buyinggroup.com/static/media/all_balances.59192541.svg" />
+                </div>
+                <span className={styles.headerText}>Updates</span>
+              </Flex>
               <div className={styles.boxNodata}>
                 <img src="/nodata.svg" />
               </div>
@@ -346,7 +387,11 @@ const Home = () => {
             <div className={styles.lastCommit}>
               <span className={styles.headerText}>Last Commitments</span>
               {dataCommitments?.map((e, i) => (
-                <Row key={i.toString()} className={styles.commitItem}>
+                <Row
+                  gutter={[8, 8]}
+                  key={i.toString()}
+                  className={styles.commitItem}
+                >
                   <Col xs={8} sm={8} lg={6} xl={5}>
                     <div className={styles.boxImg}>
                       <img src={e.img}></img>

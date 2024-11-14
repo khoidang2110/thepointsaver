@@ -87,6 +87,10 @@ $red2: #ffe5e6;
       display: block;
       line-height: 30px !important;
     }
+    .smallmoney {
+      font-size: 18px;
+      display: block;
+    }
     .moneyBig {
       margin-top: 1.5rem;
       font-size: 30px;
@@ -171,8 +175,17 @@ $red2: #ffe5e6;
 .headerText {
   font-size: 18px;
   color: $primary;
-  margin-bottom: 10px;
   font-weight: 600;
+  display: block;
+  margin-left: 5px;
+}
+.boxIcon {
+  width: 30px;
+  height: 30px;
+  img {
+    width: 100%;
+    height: 100%;
+  }
 }
 
 .greentag {

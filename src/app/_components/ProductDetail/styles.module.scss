@@ -4,11 +4,13 @@ $third: #f4a259;
 $four: #5b8e7d;
 $five: #bc4b51;
 $white: white;
+$black: black;
 $gray: #c5d7b5;
 $green1: #52c41a;
 $green2: rgb(246, 255, 237);
 $red1: #c5161d;
 $red2: #ffe5e6;
+$gray1: rgb(175, 175, 175);
 
 .tagProd {
   position: absolute;
@@ -86,4 +88,130 @@ $red2: #ffe5e6;
   background-color: $red2;
   padding: 4px 10px;
   border-radius: 99px;
+}
+
+.detailProd {
+  width: 100%;
+  padding: 0px !important;
+  .boxImg {
+    width: 100px;
+    height: 100px;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .nameProd {
+    font-size: 18px;
+    line-height: 27px;
+    text-transform: uppercase !important;
+  }
+  .info {
+    align-items: center;
+    .price {
+      font-size: 26px;
+      margin-bottom: 0 !important;
+    }
+  }
+
+  .text {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: normal !important;
+  }
+
+  .delivery {
+    padding: 10px 13px;
+    background-color: $green2;
+    border-radius: 12px;
+    .title {
+      color: $black;
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 27px;
+      margin-bottom: 10px;
+      display: block;
+    }
+    .options {
+      padding: 10px 13px;
+      background-color: $white;
+      border-radius: 12px;
+      margin-bottom: 0.5rem;
+      .maintext {
+        color: $gray1;
+        font-size: 16px;
+        font-weight: 400;
+        display: block;
+      }
+      .text {
+        display: block;
+        font-size: 16px;
+        font-weight: 400;
+      }
+      .nameItem {
+        display: block;
+        font-size: 16px;
+        margin: 10px 0px;
+      }
+      .textCenter {
+        text-align: center;
+      }
+    }
+  }
+}
+.allowText {
+  margin: 10px 0;
+  display: block;
+}
+.subText {
+  color: $gray1;
+  font-weight: 400;
+  line-height: normal !important;
+}
+.mr5 {
+  margin-right: 5px;
+}
+.blackFri {
+  padding: 0 10px;
+  background: linear-gradient(180deg, #787977, #000 70%);
+  border: 0.5px solid #3d3d3d;
+  border-radius: 10px !important;
+  color: $white;
+  height: fit-content;
+  display: block;
+  width: fit-content;
+}
+.regular12 {
+  font-size: 12px !important;
+}
+
+.smallLogo {
+  width: 40px;
+  height: 40px;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+.commitProd {
+  padding: 20px;
+  border-bottom: 1px solid #c5d7b5;
+  border-top: 1px solid #c5d7b5;
+  .boxImgCommit {
+    max-width: 80%;
+    max-height: 100%;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .regular16 {
+    font-size: 14px !important;
+    line-height: 21px !important;
+  }
 }

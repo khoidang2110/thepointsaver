@@ -1,13 +1,9 @@
 import { Button } from "antd";
 import React from "react";
 
-export const ButtonCus = ({ color, variant, text }: any) => {
+export const ButtonCus = ({ color, variant, text, style, onClick }: any) => {
   return (
-    <Button
-      color={color}
-      variant={variant}
-      style={{ borderRadius: 20, width: "48%", padding: 14 }}
-    >
+    <Button onClick={onClick} style={style} color={color} variant={variant}>
       {text}
     </Button>
   );

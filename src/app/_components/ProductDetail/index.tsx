@@ -1,21 +1,35 @@
 "use client";
-import { Col, Flex, Modal, Row } from "antd";
+import { Col, Flex, Modal, Row, Progress, InputNumber } from "antd";
 import { ButtonCus } from "../ButtonCus";
 import styles from "./styles.module.scss";
 import { useState } from "react";
+import styled from "styled-components";
+import type { ProgressProps } from "antd";
+import ModalCommit from "./modalCommit";
+import ModalView from "./modalView";
 
 export default function ProductDetail({ data }: any) {
-  const [open, setOpen] = useState<boolean>(false);
+  const [openView, setOpenView] = useState<boolean>(false);
+  const [openCommit, setOpenCommit] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
 
-  const showLoading = () => {
-    setOpen(true);
+  const showView = () => {
+    setOpenView(true);
     // setLoading(true);
 
     // // Simple loading mock. You should add cleanup logic in real world.
     // setTimeout(() => {
     //   setLoading(false);
     // }, 2000);
+  };
+  const showCommit = () => {
+    setOpenCommit(true);
+  };
+  const onClose = () => {
+    setOpenCommit(false);
+  };
+  const onCloseView = () => {
+    setOpenView(false);
   };
 
   return (
@@ -29,16 +43,18 @@ export default function ProductDetail({ data }: any) {
         className={styles.formProduct}
         style={{ borderTop: data?.tag ? `4px solid red` : "none" }}
       >
-        <div onClick={showLoading} className={styles.boxImg}>
+        <div onClick={showView} className={styles.boxImg}>
           <img src={data?.img}></img>
           <div className={styles.tagProd}>
             <span className={styles.greentag}>▲ 12%</span>
             {/* <span className={styles.redtag}>▼ 12%</span> */}
           </div>
         </div>
-        <span onClick={showLoading} className={styles.textProduct}>
+        <span className={styles.blackFri}>🔥 Black Friday</span>
+        <span onClick={showView} className={styles.textProduct}>
           {data?.name}
         </span>
+
         <span className={styles.price}>{data?.price}</span>
         <div className={styles.moreInfo}>
           <Flex>
@@ -51,38 +67,24 @@ export default function ProductDetail({ data }: any) {
           <span className={styles.time}>{data?.time}</span>
         </div>
         <div className={styles.button}>
-          <ButtonCus color="primary" variant="solid" text="Commit" />
-          <ButtonCus color="primary" variant="outlined" text="View deal" />
+          <ButtonCus
+            onClick={showCommit}
+            style={{ width: "48%", borderRadius: 20, padding: 14 }}
+            color="primary"
+            variant="solid"
+            text="Commit"
+          />
+          <ButtonCus
+            onClick={showView}
+            style={{ width: "48%", borderRadius: 20, padding: 14 }}
+            color="primary"
+            variant="outlined"
+            text="View deal"
+          />
         </div>
       </div>
-
-      <Modal
-        title={<p>Loading Modal</p>}
-        footer={
-          <ButtonCus type="primary" onClick={showLoading}>
-            Reload
-          </ButtonCus>
-        }
-        // loading={loading}
-        open={open}
-        onCancel={() => setOpen(false)}
-      >
-        <Row>
-          <Col xs={24} lg={9}>
-            <div className={styles.boxImg}>
-              <img src="https://buyinggroup.com/static/media/dashboard_container_filled.1a79ce62.svg" />
-            </div>
-          </Col>
-          <Col xs={24} lg={15}>
-            <span>This is a loading modal.</span>
-            <Flex>
-              <span></span>
-              <span></span>
-              <span></span>
-            </Flex>
-          </Col>
-        </Row>
-      </Modal>
+      <ModalView onClose={onCloseView} openView={openView} />
+      <ModalCommit onClose={onClose} openCommit={openCommit} />
     </Col>
   );
 }
