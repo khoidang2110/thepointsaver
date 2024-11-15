@@ -3,7 +3,7 @@ import { Col, Flex, Modal, Row, Progress, InputNumber } from "antd";
 import { ButtonCus } from "../ButtonCus";
 import styles from "./styles.module.scss";
 import { useState } from "react";
-import styled from "styled-components";
+
 import type { ProgressProps } from "antd";
 import ModalCommit from "./modalCommit";
 import ModalView from "./modalView";

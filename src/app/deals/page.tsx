@@ -1,301 +1,183 @@
-import React from 'react';
-import { Avatar, Button, Space, Flex } from 'antd';
-import { Card, Col, Row , Image } from 'antd';
-import { UserOutlined } from '@ant-design/icons';
+"use client";
+import { Col, Row, Tabs } from "antd";
+import FilterOptions from "../_components/FilterOptions";
+import ProductDetail from "../_components/ProductDetail";
+const Deals = () => {
+  const dataProd = [
+    {
+      img: "https://i5.walmartimages.com/asr/fff458b8-4eff-491d-af67-34968fe58531.57b1a2f9f198a430353cf8bde1c1ed80.jpeg?odnHeight=450&odnWidth=450&odnBg=ffffff",
+      name: "Dualsense Wireless Controller For Playstation 5 - Fortnite Limited Edition",
+      price: "$19.00",
+      tag: "Below",
+      time: "ED 11-23-2024",
+      brand: [
+        {
+          name: "Amazon",
+          img: "https://logo.clearbit.com/amazon.com",
+        },
+        {
+          name: "Amazon",
+          img: "https://logo.clearbit.com/amazon.com",
+        },
+      ],
+    },
+    {
+      img: "https://i5.walmartimages.com/asr/fff458b8-4eff-491d-af67-34968fe58531.57b1a2f9f198a430353cf8bde1c1ed80.jpeg?odnHeight=450&odnWidth=450&odnBg=ffffff",
+      name: "Dualsense Wireless Controller For Playstation 5 - Fortnite Limited Edition",
+      price: "$19.00",
+      tag: "Below",
+      time: "ED 11-23-2024",
+      brand: [
+        {
+          name: "Amazon",
+          img: "https://logo.clearbit.com/amazon.com",
+        },
+        {
+          name: "Amazon",
+          img: "https://logo.clearbit.com/amazon.com",
+        },
+      ],
+    },
+    {
+      img: "https://i5.walmartimages.com/asr/fff458b8-4eff-491d-af67-34968fe58531.57b1a2f9f198a430353cf8bde1c1ed80.jpeg?odnHeight=450&odnWidth=450&odnBg=ffffff",
+      name: "Dualsense Wireless Controller For Playstation 5 - Fortnite Limited Edition",
+      price: "$19.00",
+      tag: "Below",
+      time: "ED 11-23-2024",
+      brand: [
+        {
+          name: "Amazon",
+          img: "https://logo.clearbit.com/amazon.com",
+        },
+        {
+          name: "Amazon",
+          img: "https://logo.clearbit.com/amazon.com",
+        },
+      ],
+    },
+    {
+      img: "https://i5.walmartimages.com/asr/fff458b8-4eff-491d-af67-34968fe58531.57b1a2f9f198a430353cf8bde1c1ed80.jpeg?odnHeight=450&odnWidth=450&odnBg=ffffff",
+      name: "Dualsense Wireless Controller For Playstation 5 - Fortnite Limited Edition",
+      price: "$19.00",
+      tag: "Below",
+      time: "ED 11-23-2024",
+      brand: [
+        {
+          name: "Amazon",
+          img: "https://logo.clearbit.com/amazon.com",
+        },
+        {
+          name: "Amazon",
+          img: "https://logo.clearbit.com/amazon.com",
+        },
+      ],
+    },
+    {
+      img: "https://i5.walmartimages.com/asr/fff458b8-4eff-491d-af67-34968fe58531.57b1a2f9f198a430353cf8bde1c1ed80.jpeg?odnHeight=450&odnWidth=450&odnBg=ffffff",
+      name: "Dualsense Wireless Controller For Playstation 5 - Fortnite Limited Edition",
+      price: "$19.00",
+      tag: "Below",
+      time: "ED 11-23-2024",
+      brand: [
+        {
+          name: "Amazon",
+          img: "https://logo.clearbit.com/amazon.com",
+        },
+        {
+          name: "Amazon",
+          img: "https://logo.clearbit.com/amazon.com",
+        },
+      ],
+    },
+    {
+      img: "https://i5.walmartimages.com/asr/fff458b8-4eff-491d-af67-34968fe58531.57b1a2f9f198a430353cf8bde1c1ed80.jpeg?odnHeight=450&odnWidth=450&odnBg=ffffff",
+      name: "Dualsense Wireless Controller For Playstation 5 - Fortnite Limited Edition",
+      price: "$19.00",
+      tag: "Below",
+      time: "ED 11-23-2024",
+      brand: [
+        {
+          name: "Amazon",
+          img: "https://logo.clearbit.com/amazon.com",
+        },
+        {
+          name: "Amazon",
+          img: "https://logo.clearbit.com/amazon.com",
+        },
+      ],
+    },
+    {
+      img: "https://i5.walmartimages.com/asr/fff458b8-4eff-491d-af67-34968fe58531.57b1a2f9f198a430353cf8bde1c1ed80.jpeg?odnHeight=450&odnWidth=450&odnBg=ffffff",
+      name: "Dualsense Wireless Controller For Playstation 5 - Fortnite Limited Edition",
+      price: "$19.00",
+      tag: "Below",
+      time: "ED 11-23-2024",
+      brand: [
+        {
+          name: "Amazon",
+          img: "https://logo.clearbit.com/amazon.com",
+        },
+        {
+          name: "Amazon",
+          img: "https://logo.clearbit.com/amazon.com",
+        },
+      ],
+    },
+    {
+      img: "https://i5.walmartimages.com/asr/fff458b8-4eff-491d-af67-34968fe58531.57b1a2f9f198a430353cf8bde1c1ed80.jpeg?odnHeight=450&odnWidth=450&odnBg=ffffff",
+      name: "Dualsense Wireless Controller For Playstation 5 - Fortnite Limited Edition",
+      price: "$19.00",
+      tag: "Below",
+      time: "ED 11-23-2024",
+      brand: [
+        {
+          name: "Amazon",
+          img: "https://logo.clearbit.com/amazon.com",
+        },
+        {
+          name: "Amazon",
+          img: "https://logo.clearbit.com/amazon.com",
+        },
+      ],
+    },
+  ];
 
-const Deals = () => (
-<div>
+  const { TabPane } = Tabs;
+  // Handle tab change
+  const handleTabChange = (key: any) => {};
+  const dataTab = [
+    {
+      name: "On Sale Now",
+    },
+    {
+      name: "Below Cost",
+    },
+    {
+      name: "In Store",
+    },
+    {
+      name: "All Active",
+    },
+  ];
 
-<Row gutter={16}>
-  <Col xs={12} sm={8} md={8} lg={6} xl={6} className='py-2'>
-    <Card    bordered={false} style={{ width: '100%' }}>
-     <div>  <Image preview={false}
-     style={{ width: '100%' ,maxWidth:'95%',objectFit:'contain'}}
-    // width={100%}
-    src="https://pisces.bbystatic.com/prescaled/500/500/ima…/BestBuy_US/images/products/6544/6544304cv16d.jpg"
-  /></div>
-     <div className='h-7'> </div>
-     <div>
-        <div className='w-full h-10'>
-            <span  className="text-sm uppercase overflow-hidden"
-        style={{
-            display: '-webkit-box',
-            WebkitBoxOrient: 'vertical',
-            overflow: 'hidden',
-            WebkitLineClamp: 2,
-            whiteSpace: 'normal',
-        }}
-            >Amazon - Echo Show 5 (3Rd Generation) 5.5 Inch Smart Display With Alexa - Cloud Blue</span>
-        </div>
-        <div className='flex items-center justify-center text-base '> <p>$51.00</p></div>
-        <div className='flex justify-between items-center'>  
-             <Space wrap size={2}>
-        <Avatar shape="square" size={20} icon={<UserOutlined />} />
-      <Avatar shape="square" size={20} icon={<UserOutlined />} />
-      <Avatar shape="square" size={20} icon={<UserOutlined />} />
-      <Avatar shape="square" size={20} icon={<UserOutlined />} />
-      <Avatar shape="square" size={20} icon={<UserOutlined />} />
-      <Avatar shape="square" size={20} icon={<UserOutlined />} />
-
-    </Space>
-    <p className='text-xs'>ED 11-08-2024</p>
-    </div>
-          </div>
-    <div className='flex mt-2 justify-around w-full'> 
-        <div className='px-1'>
-        <Button type="primary"  block  className='mx-2 '>Commit</Button>
-
-
-        </div>
-        <div className='px-1'>
-        <Button block   className='mx-2'>View Deal</Button></div>
-
-
-        </div>
-
-    </Card>
-  </Col>
-  <Col xs={12} sm={8} md={8} lg={6} xl={6} className='py-2'>
-    <Card    bordered={false} style={{ width: '100%' }}>
-      <p>Card content</p>
-      <p>Card content</p>
-      <p>Card content</p>
-    </Card>
-  </Col>
-  <Col xs={12} sm={8} md={8} lg={6} xl={6} className='py-2'>
-    <Card    bordered={false} style={{ width: '100%' }}>
-      <p>Card content</p>
-      <p>Card content</p>
-      <p>Card content</p>
-    </Card>
-  </Col>
-  <Col xs={12} sm={8} md={8} lg={6} xl={6} className='py-2'>
-    <Card    bordered={false} style={{ width: '100%' }}>
-      <p>Card content</p>
-      <p>Card content</p>
-      <p>Card content</p>
-    </Card>
-  </Col>
-  <Col xs={12} sm={8} md={8} lg={6} xl={6} className='py-2'>
-    <Card    bordered={false} style={{ width: '100%' }}>
-      <p>Card content</p>
-      <p>Card content</p>
-      <p>Card content</p>
-    </Card>
-  </Col>
-  <Col xs={12} sm={8} md={8} lg={6} xl={6} className='py-2'>
-    <Card    bordered={false} style={{ width: '100%' }}>
-      <p>Card content</p>
-      <p>Card content</p>
-      <p>Card content</p>
-    </Card>
-  </Col>
-  <Col xs={12} sm={8} md={8} lg={6} xl={6} className='py-2'>
-    <Card    bordered={false} style={{ width: '100%' }}>
-      <p>Card content</p>
-      <p>Card content</p>
-      <p>Card content</p>
-    </Card>
-  </Col>
-  <Col xs={12} sm={8} md={8} lg={6} xl={6} className='py-2'>
-    <Card    bordered={false} style={{ width: '100%' }}>
-      <p>Card content</p>
-      <p>Card content</p>
-      <p>Card content</p>
-    </Card>
-  </Col>
-  <Col xs={12} sm={8} md={8} lg={6} xl={6} className='py-2'>
-    <Card    bordered={false} style={{ width: '100%' }}>
-      <p>Card content</p>
-      <p>Card content</p>
-      <p>Card content</p>
-    </Card>
-  </Col>
-  <Col xs={12} sm={8} md={8} lg={6} xl={6} className='py-2'>
-    <Card    bordered={false} style={{ width: '100%' }}>
-      <p>Card content</p>
-      <p>Card content</p>
-      <p>Card content</p>
-    </Card>
-  </Col>
-  <Col xs={12} sm={8} md={8} lg={6} xl={6} className='py-2'>
-    <Card    bordered={false} style={{ width: '100%' }}>
-      <p>Card content</p>
-      <p>Card content</p>
-      <p>Card content</p>
-    </Card>
-  </Col>
-  <Col xs={12} sm={8} md={8} lg={6} xl={6} className='py-2'>
-    <Card    bordered={false} style={{ width: '100%' }}>
-      <p>Card content</p>
-      <p>Card content</p>
-      <p>Card content</p>
-    </Card>
-  </Col>
-  <Col xs={12} sm={8} md={8} lg={6} xl={6} className='py-2'>
-    <Card    bordered={false} style={{ width: '100%' }}>
-      <p>Card content</p>
-      <p>Card content</p>
-      <p>Card content</p>
-    </Card>
-  </Col>
-  <Col xs={12} sm={8} md={8} lg={6} xl={6} className='py-2'>
-    <Card    bordered={false} style={{ width: '100%' }}>
-      <p>Card content</p>
-      <p>Card content</p>
-      <p>Card content</p>
-    </Card>
-  </Col>
-  <Col xs={12} sm={8} md={8} lg={6} xl={6} className='py-2'>
-    <Card    bordered={false} style={{ width: '100%' }}>
-      <p>Card content</p>
-      <p>Card content</p>
-      <p>Card content</p>
-    </Card>
-  </Col>
-  <Col xs={12} sm={8} md={8} lg={6} xl={6} className='py-2'>
-    <Card    bordered={false} style={{ width: '100%' }}>
-      <p>Card content</p>
-      <p>Card content</p>
-      <p>Card content</p>
-    </Card>
-  </Col>
-  <Col xs={12} sm={8} md={8} lg={6} xl={6} className='py-2'>
-    <Card    bordered={false} style={{ width: '100%' }}>
-      <p>Card content</p>
-      <p>Card content</p>
-      <p>Card content</p>
-    </Card>
-  </Col>
-  <Col xs={12} sm={8} md={8} lg={6} xl={6} className='py-2'>
-    <Card bordered={false} style={{ width: '100%' }}>
-      <p>Card content</p>
-      <p>Card content</p>
-      <p>Card content</p>
-    </Card>
-  </Col>
-  <Col xs={12} sm={8} md={8} lg={6} xl={6} className='py-2'>
-    <Card    bordered={false} style={{ width: '100%' }}>
-      <p>Card content</p>
-      <p>Card content</p>
-      <p>Card content</p>
-    </Card>
-  </Col>
-  <Col xs={12} sm={8} md={8} lg={6} xl={6} className='py-2'>
-    <Card    bordered={false} style={{ width: '100%' }}>
-      <p>Card content</p>
-      <p>Card content</p>
-      <p>Card content</p>
-    </Card>
-  </Col>
-  <Col xs={12} sm={8} md={8} lg={6} xl={6} className='py-2'>
-    <Card    bordered={false} style={{ width: '100%' }}>
-      <p>Card content</p>
-      <p>Card content</p>
-      <p>Card content</p>
-    </Card>
-  </Col>
-  <Col xs={12} sm={8} md={8} lg={6} xl={6} className='py-2'>
-    <Card    bordered={false} style={{ width: '100%' }}>
-      <p>Card content</p>
-      <p>Card content</p>
-      <p>Card content</p>
-    </Card>
-  </Col>
-  <Col xs={12} sm={8} md={8} lg={6} xl={6} className='py-2'>
-    <Card    bordered={false} style={{ width: '100%' }}>
-      <p>Card content</p>
-      <p>Card content</p>
-      <p>Card content</p>
-    </Card>
-  </Col>
-  <Col xs={12} sm={8} md={8} lg={6} xl={6} className='py-2'>
-    <Card    bordered={false} style={{ width: '100%' }}>
-      <p>Card content</p>
-      <p>Card content</p>
-      <p>Card content</p>
-    </Card>
-  </Col>
-  <Col xs={12} sm={8} md={8} lg={6} xl={6} className='py-2'>
-    <Card    bordered={false} style={{ width: '100%' }}>
-      <p>Card content</p>
-      <p>Card content</p>
-      <p>Card content</p>
-    </Card>
-  </Col>
-  <Col xs={12} sm={8} md={8} lg={6} xl={6} className='py-2'>
-    <Card    bordered={false} style={{ width: '100%' }}>
-      <p>Card content</p>
-      <p>Card content</p>
-      <p>Card content</p>
-    </Card>
-  </Col>
-  <Col xs={12} sm={8} md={8} lg={6} xl={6} className='py-2'>
-    <Card    bordered={false} style={{ width: '100%' }}>
-      <p>Card content</p>
-      <p>Card content</p>
-      <p>Card content</p>
-    </Card>
-  </Col>
-  <Col xs={12} sm={8} md={8} lg={6} xl={6} className='py-2'>
-    <Card    bordered={false} style={{ width: '100%' }}>
-      <p>Card content</p>
-      <p>Card content</p>
-      <p>Card content</p>
-    </Card>
-  </Col>
-  <Col xs={12} sm={8} md={8} lg={6} xl={6} className='py-2'>
-    <Card    bordered={false} style={{ width: '100%' }}>
-      <p>Card content</p>
-      <p>Card content</p>
-      <p>Card content</p>
-    </Card>
-  </Col>
-  <Col xs={12} sm={8} md={8} lg={6} xl={6} className='py-2'>
-    <Card    bordered={false} style={{ width: '100%' }}>
-      <p>Card content</p>
-      <p>Card content</p>
-      <p>Card content</p>
-    </Card>
-  </Col>
-  <Col xs={12} sm={8} md={8} lg={6} xl={6} className='py-2'>
-    <Card    bordered={false} style={{ width: '100%' }}>
-      <p>Card content</p>
-      <p>Card content</p>
-      <p>Card content</p>
-    </Card>
-  </Col>
-  <Col xs={12} sm={8} md={8} lg={6} xl={6} className='py-2'>
-    <Card    bordered={false} style={{ width: '100%' }}>
-      <p>Card content</p>
-      <p>Card content</p>
-      <p>Card content</p>
-    </Card>
-  </Col>
-  <Col xs={12} sm={8} md={8} lg={6} xl={6} className='py-2'>
-    <Card    bordered={false} style={{ width: '100%' }}>
-      <p>Card content</p>
-      <p>Card content</p>
-      <p>Card content</p>
-    </Card>
-  </Col>
-  <Col xs={12} sm={8} md={8} lg={6} xl={6} className='py-2'>
-    <Card    bordered={false} style={{ width: '100%' }}>
-      <p>Card content</p>
-      <p>Card content</p>
-      <p>Card content</p>
-    </Card>
-  </Col>
-  <Col xs={12} sm={8} md={8} lg={6} xl={6} className='py-2'>
-    <Card    bordered={false} style={{ width: '100%' }}>
-      <p>Card content</p>
-      <p>Card content</p>
-      <p>Card content</p>
-    </Card>
-  </Col>
-</Row>
-
-</div>
-);
+  return (
+    <>
+      <Tabs defaultActiveKey={dataTab[0].name} onChange={handleTabChange}>
+        {dataTab?.map((e, index) => (
+          <TabPane tab={e.name} key={e.name}>
+            <FilterOptions />
+            <Row gutter={[16, 16]}>
+              {dataProd?.map((item, i) => (
+                <Col key={i.toString()} xs={24} sm={24} md={12} lg={8} xl={6}>
+                  <ProductDetail data={item} />
+                </Col>
+              ))}
+            </Row>
+          </TabPane>
+        ))}
+      </Tabs>
+    </>
+  );
+};
 
 export default Deals;
