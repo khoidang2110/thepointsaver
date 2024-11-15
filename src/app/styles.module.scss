@@ -90,6 +90,7 @@ $red2: #ffe5e6;
     .smallmoney {
       font-size: 18px;
       display: block;
+      margin-left: 8px;
     }
     .moneyBig {
       margin-top: 1.5rem;
@@ -98,14 +99,12 @@ $red2: #ffe5e6;
       line-height: 30px !important;
     }
   }
+
   .update {
     background-color: $white;
     padding: 12px;
     border-radius: 12px;
     height: 100%;
-  }
-  .full {
-    margin-top: 12px;
   }
 
   .table {
@@ -211,6 +210,9 @@ $red2: #ffe5e6;
     height: 100%;
     object-fit: contain;
   }
+}
+.full {
+  margin-top: 12px;
 }
 
 @media screen and (max-width: 1023px) {

@@ -236,7 +236,7 @@ const Home = () => {
           <Col xs={24} lg={16}>
             <Row gutter={[16, 16]}>
               <Col xs={24} sm={24} md={8} lg={8}>
-                <div className={styles.formItem}>
+                <div className={`${styles.formItem} ${styles.h120}`}>
                   <Flex align="center">
                     <div className={styles.boxIcon}>
                       <img src="https://buyinggroup.com/static/media/all_balances.59192541.svg" />
@@ -256,7 +256,7 @@ const Home = () => {
                 </div>
               </Col>
               <Col xs={24} sm={24} md={8} lg={8}>
-                <div className={styles.formItem}>
+                <div className={`${styles.formItem} ${styles.h120}`}>
                   <Flex align="center">
                     <div className={styles.boxIcon}>
                       <img src="https://buyinggroup.com/static/media/all_balances.59192541.svg" />
@@ -268,7 +268,7 @@ const Home = () => {
                 </div>
               </Col>
               <Col xs={24} sm={24} md={8} lg={8}>
-                <div className={styles.formItem}>
+                <div className={`${styles.formItem} ${styles.h120}`}>
                   <Flex align="center">
                     <div className={styles.boxIcon}>
                       <img src="https://buyinggroup.com/static/media/all_balances.59192541.svg" />
@@ -288,43 +288,73 @@ const Home = () => {
                     </div>
                     <span className={styles.headerText}>Payments</span>
                   </Flex>
-                  <Flex justify="space-between" align="center">
-                    <Col xs={12} sm={12} lg={3} className={styles.moreItem}>
+                  <Row justify="space-between">
+                    <Col
+                      xs={12}
+                      sm={12}
+                      md={12}
+                      lg={4}
+                      className={styles.moreItem}
+                    >
                       <span className={styles.title}>Adjustment</span>
-                      <Flex justify="space-between" align="center">
+                      <Flex align="center">
                         <span className={styles.money}>$0.00</span>
                         <span className={styles.smallmoney}>$0.00</span>
                       </Flex>
                     </Col>
-                    <Col xs={12} sm={12} lg={3} className={styles.moreItem}>
+                    <Col
+                      xs={12}
+                      sm={12}
+                      md={12}
+                      lg={4}
+                      className={styles.moreItem}
+                    >
                       <span className={styles.title}>Requested</span>
-                      <Flex justify="space-between" align="center">
+                      <Flex align="center">
                         <span className={styles.money}>$0.00</span>
                         <span className={styles.smallmoney}>$0.00</span>
                       </Flex>
                     </Col>
-                    <Col xs={12} sm={12} lg={3} className={styles.moreItem}>
+                    <Col
+                      xs={12}
+                      sm={12}
+                      md={12}
+                      lg={4}
+                      className={styles.moreItem}
+                    >
                       <span className={styles.title}>Processing</span>
-                      <Flex justify="space-between" align="center">
+                      <Flex align="center">
                         <span className={styles.money}>$0.00</span>
                         <span className={styles.smallmoney}>$0.00</span>
                       </Flex>
                     </Col>
-                    <Col xs={12} sm={12} lg={3} className={styles.moreItem}>
+                    <Col
+                      xs={12}
+                      sm={12}
+                      md={12}
+                      lg={4}
+                      className={styles.moreItem}
+                    >
                       <span className={styles.title}>Paid</span>
-                      <Flex justify="space-between" align="center">
+                      <Flex align="center">
                         <span className={styles.money}>$0.00</span>
                         <span className={styles.smallmoney}>$0.00</span>
                       </Flex>
                     </Col>
-                    <Col xs={12} sm={12} lg={3} className={styles.moreItem}>
+                    <Col
+                      xs={12}
+                      sm={12}
+                      md={12}
+                      lg={4}
+                      className={styles.moreItem}
+                    >
                       <span className={styles.title}>Sent</span>
-                      <Flex justify="space-between" align="center">
+                      <Flex align="center">
                         <span className={styles.money}>$0.00</span>
                         <span className={styles.smallmoney}>$0.00</span>
                       </Flex>
                     </Col>
-                  </Flex>
+                  </Row>
                 </div>
               </Col>
             </Row>

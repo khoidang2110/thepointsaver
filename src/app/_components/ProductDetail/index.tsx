@@ -35,9 +35,13 @@ export default function ProductDetail({ data }: any) {
   return (
     <Col span={24}>
       {data?.tag && (
-        <div className={styles.tagCost}>
+        <Flex align="center" className={styles.tagCost}>
+          <div className={styles.boxImg}>
+            <img src="/icon-below.svg" />
+          </div>
+
           <span>Below cost</span>
-        </div>
+        </Flex>
       )}
       <div
         className={styles.formProduct}
