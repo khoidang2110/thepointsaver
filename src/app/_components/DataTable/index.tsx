@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { Flex, Table } from "antd";
 import type { TableColumnsType, TableProps } from "antd";
@@ -9,10 +10,15 @@ interface DataType {
   status: string;
   price: number;
   comm: number;
+  count: number;
+  fulfilled: number;
   img: string;
   sku: string;
   dealId: string;
   commitId: string;
+  total: number;
+  createDate: string;
+  expiryDay: string;
 }
 
 const columns: TableColumnsType<DataType> = [
@@ -69,18 +75,68 @@ const columns: TableColumnsType<DataType> = [
       return 0;
     },
     render: (text, record) => {
-      return <span className={styles.greentag}>Active</span>;
+      return (
+        <>
+          <span className={styles.greentag}>Active</span>
+          <div className={styles.itemCommit}>
+            <span className={styles.nameItem}>Count</span>
+            <span>{record?.count}</span>
+          </div>
+        </>
+      );
     },
   },
   {
     title: "Price",
     dataIndex: "price",
     sorter: (a, b) => a.price - b.price,
+    render: (text, record) => {
+      return (
+        <>
+          <span>{record?.price}</span>
+          <div className={styles.itemCommit}>
+            <span className={styles.nameItem}>Fulfilled</span>
+            <span>{record?.fulfilled}</span>
+          </div>
+        </>
+      );
+    },
   },
   {
     title: "Comm.",
     dataIndex: "comm",
     sorter: (a, b) => a.comm - b.comm,
+  },
+  {
+    title: "Total",
+    dataIndex: "total",
+    sorter: (a, b) => a.total - b.total,
+  },
+  {
+    title: "Create Date",
+    dataIndex: "createDate",
+    sorter: (a, b) => {
+      if (a.createDate < b.createDate) {
+        return -1;
+      }
+      if (a.createDate > b.createDate) {
+        return 1;
+      }
+      return 0;
+    },
+  },
+  {
+    title: "Expiry Day",
+    dataIndex: "expiryDay",
+    sorter: (a, b) => {
+      if (a.expiryDay < b.expiryDay) {
+        return -1;
+      }
+      if (a.expiryDay > b.expiryDay) {
+        return 1;
+      }
+      return 0;
+    },
   },
 ];
 
@@ -94,6 +150,11 @@ const data = [
     sku: "Amazon-Echo-Pop-Lavender-Bloom-4804",
     dealId: "DL-11240025",
     commitId: "CM-2484913377",
+    total: 55.47,
+    createDate: "11-04-2024, 15:53:11",
+    expiryDay: "11-30-2024",
+    count: 3,
+    fulfilled: 0,
     img: "https://pisces.bbystatic.com/prescaled/500/500/image2/BestBuy_US/images/products/6544/6544306cv1d.jpg",
   },
   {
@@ -105,6 +166,11 @@ const data = [
     sku: "Amazon-Echo-Pop-Lavender-Bloom-4804",
     dealId: "DL-11240025",
     commitId: "CM-2484913377",
+    total: 55.47,
+    createDate: "11-04-2024, 15:53:11",
+    expiryDay: "1-30-2024",
+    count: 3,
+    fulfilled: 0,
     img: "https://pisces.bbystatic.com/prescaled/500/500/image2/BestBuy_US/images/products/6544/6544306cv1d.jpg",
   },
   {
@@ -116,6 +182,11 @@ const data = [
     sku: "Amazon-Echo-Pop-Lavender-Bloom-4804",
     dealId: "DL-11240025",
     commitId: "CM-2484913377",
+    total: 55.47,
+    createDate: "11-04-2024, 15:53:11",
+    expiryDay: "11-30-2024",
+    count: 3,
+    fulfilled: 0,
     img: "https://pisces.bbystatic.com/prescaled/500/500/image2/BestBuy_US/images/products/6544/6544306cv1d.jpg",
   },
 ];

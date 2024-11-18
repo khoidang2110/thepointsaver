@@ -7,6 +7,8 @@ $white: white;
 $gray: #c5d7b5;
 $green1: #52c41a;
 $green2: rgb(246, 255, 237);
+$yellow1: #a34400;
+$yellow2: rgba(255, 168, 68, 0.5);
 $red1: #c5161d;
 $red2: #ffe5e6;
 $gray1: rgb(175, 175, 175);
@@ -14,6 +16,13 @@ $black: black;
 .greentag {
   color: $green1;
   background-color: $green2;
+  padding: 4px 10px;
+  border-radius: 99px;
+}
+
+.yellowtag {
+  color: $yellow1;
+  background-color: $yellow2;
   padding: 4px 10px;
   border-radius: 99px;
 }

@@ -1,17 +1,18 @@
 "use client";
-
 import React, { useState, useEffect } from "react";
-import { Layout, Menu, Button, ConfigProvider, Drawer } from "antd";
+import { Layout, Menu, Button, ConfigProvider, Drawer, Row, Col, Flex } from "antd";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   PieChartOutlined,
   DollarOutlined,
   LinkOutlined,
+  DropboxOutlined,
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { useRouter, usePathname } from "next/navigation";
 import { useWindowSize } from "./_utils";
+import styles from "./styles.module.scss";
 
 const { Header, Content, Sider } = Layout;
 
@@ -20,7 +21,7 @@ function getItem(
   label: React.ReactNode,
   key: React.Key,
   icon?: React.ReactNode,
-  onClick?: () => void
+  onClick?: () => void,
 ): MenuItem {
   return { key, icon, label, onClick } as MenuItem;
 }
@@ -48,6 +49,8 @@ const LayoutWrapper = ({ children }: { children: React.ReactNode }) => {
         return "2";
       case "/commitments":
         return "3";
+      case "/orders":
+        return "4";
       default:
         return "1";
     }
@@ -63,6 +66,9 @@ const LayoutWrapper = ({ children }: { children: React.ReactNode }) => {
         break;
       case "/commitments":
         setSelectedKey("3");
+        break;
+      case "/orders":
+        setSelectedKey("4");
         break;
       default:
         setSelectedKey("1");
@@ -80,11 +86,13 @@ const LayoutWrapper = ({ children }: { children: React.ReactNode }) => {
     getItem("My Commitments", "3", <LinkOutlined />, () => {
       router.push("/commitments");
     }),
+    getItem("Orders", "4", <DropboxOutlined />, () => {
+      router.push("/orders");
+    }),
   ];
 
   // Check if current route is login or register to conditionally render Sider and Header
-  const isAuthRoute =
-    pathname === "/login" || pathname === "/register" || pathname === "/admin";
+  const isAuthRoute = pathname === "/login" || pathname === "/register" || pathname === "/admin";
 
   return (
     <ConfigProvider
@@ -100,8 +108,8 @@ const LayoutWrapper = ({ children }: { children: React.ReactNode }) => {
         },
       }}
     >
-      <Layout style={{ minHeight: "100vh" }}>
-        {!isAuthRoute && (
+      {!isAuthRoute ? (
+        <Layout style={{ minHeight: "100vh" }}>
           <Header
             style={{
               position: "fixed",
@@ -126,17 +134,13 @@ const LayoutWrapper = ({ children }: { children: React.ReactNode }) => {
               />
               <p>The Point Saver</p>
             </span>
-            <span
-              className="flex"
-              style={{ fontWeight: "600", fontSize: "12px" }}
-            >
+            <span className="flex" style={{ fontWeight: "600", fontSize: "12px" }}>
               <p>hello</p>
             </span>
           </Header>
-        )}
-        <Layout style={{ marginTop: isAuthRoute ? 0 : 64 }}>
-          {!isAuthRoute &&
-            (size.width > 900 ? (
+
+          <Layout style={{ marginTop: 64 }}>
+            {size.width > 900 ? (
               <Sider
                 trigger={null}
                 collapsible
@@ -153,12 +157,7 @@ const LayoutWrapper = ({ children }: { children: React.ReactNode }) => {
                   borderRadius: 12,
                 }}
               >
-                <Menu
-                  theme="light"
-                  selectedKeys={[selectedKey]}
-                  mode="inline"
-                  items={items}
-                />
+                <Menu theme="light" selectedKeys={[selectedKey]} mode="inline" items={items} />
               </Sider>
             ) : (
               <Drawer
@@ -180,28 +179,70 @@ const LayoutWrapper = ({ children }: { children: React.ReactNode }) => {
                   items={items}
                 />
               </Drawer>
-            ))}
+            )}
 
-          <Layout
-            style={{
-              marginLeft: size.width < 900 ? 0 : collapsed ? 80 : 200,
-              padding: "0 24px 24px",
-              transition: "margin-left 0.3s ease",
-            }}
-          >
-            <Content
+            <Layout
               style={{
-                margin: 0,
-                minHeight: 280,
-                background: "#f5f5f5",
-                borderRadius: 12,
+                marginLeft: size.width < 900 ? 0 : collapsed ? 80 : 200,
+                padding: "0 24px 24px",
+                transition: "margin-left 0.3s ease",
               }}
             >
-              {children}
-            </Content>
+              <Content
+                style={{
+                  margin: 0,
+                  minHeight: 280,
+                  background: "#f5f5f5",
+                  borderRadius: 12,
+                }}
+              >
+                {children}
+              </Content>
+            </Layout>
           </Layout>
         </Layout>
-      </Layout>
+      ) : (
+        <>
+          {children}
+          {/* <Row align="middle">
+            <Col xs={24} sm={24} md={24} lg={8} xl={8}>
+              <div className={styles.logoFooter}>
+                <img src="https://buyinggroup.com/static/media/BuyingGroup-Logo.f4da503f.svg" />
+              </div>
+            </Col>
+            <Col xs={24} sm={24} md={24} lg={7} xl={7}>
+              <Flex justify="space-around" align="center">
+                <div>
+                  <span className={styles.textFooter}>Home</span>
+                  <span className={styles.textFooter}>About</span>
+                </div>
+                <div>
+                  <span className={styles.textFooter}>FAQs</span>
+                  <span className={styles.textFooter}>Contact Us</span>
+                </div>
+              </Flex>
+            </Col>
+            <Col xs={24} sm={24} md={24} lg={9} xl={9}>
+              <Flex justify="space-around" align="center" className={styles.itemFooter}>
+                <Flex>
+                  <img src="https://buyinggroup.com/static/media/whatsapp-icon.b8d85d1d.svg" />
+                  <span className={styles.infoFooter}>+1 747-296-4177</span>
+                </Flex>
+                <div>
+                  <Flex>
+                    <img src="https://buyinggroup.com/static/media/whatsapp-icon.b8d85d1d.svg" />
+                    <span className={styles.infoFooter}>+1 747-296-4177</span>
+                  </Flex>
+                  <Flex>
+                    <img src="https://buyinggroup.com/static/media/whatsapp-icon.b8d85d1d.svg" />
+                    <span className={styles.infoFooter}>+1 747-296-4177</span>
+                  </Flex>
+                </div>
+              </Flex>
+            </Col>
+          </Row> */}
+        </>
+      )}
     </ConfigProvider>
   );
 };

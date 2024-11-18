@@ -1,181 +1,181 @@
-'use client';
-import React, { useEffect, useState } from 'react';
-import styles from './styles.module.scss';
-import { Col, Row, Flex } from 'antd';
-import DataTable from './_components/DataTable';
-import ProductDetail from './_components/ProductDetail';
-import { Swiper, SwiperSlide } from 'swiper/react';
+"use client";
+import React, { useEffect, useState } from "react";
+import styles from "./styles.module.scss";
+import { Col, Row, Flex } from "antd";
+import DataTable from "./_components/DataTable";
+import ProductDetail from "./_components/ProductDetail";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/scrollbar';
-import { useWindowSize } from './_utils';
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
+import { useWindowSize } from "./_utils";
 
 const Home = () => {
   const size = useWindowSize();
   const [sizeWidth, setSizeWidth] = useState<any>();
   const dataNoti = [
     {
-      name: 'BG Deals Commitment Update',
-      des: 'As many of you know, your user tier increases as you place more orders with us, allowing access to higher-tier levels and higher limits on deals. Consistent accuracy in your commitments helps you maintain and improve your tier level for deal participation. In response to your feedback, we’re implementing measures to address bot activity and ensure fair access to deals. Users who frequently commit but don’t complete orders may see their tier level decrease, creating more opportunities for other buyers. Additionally, any account caught using a bot for commitments will lose deal access on BG. Thank you for supporting our efforts to enhance the BG user experience. We’re committed to making the platform better for everyone',
+      name: "BG Deals Commitment Update",
+      des: "As many of you know, your user tier increases as you place more orders with us, allowing access to higher-tier levels and higher limits on deals. Consistent accuracy in your commitments helps you maintain and improve your tier level for deal participation. In response to your feedback, we’re implementing measures to address bot activity and ensure fair access to deals. Users who frequently commit but don’t complete orders may see their tier level decrease, creating more opportunities for other buyers. Additionally, any account caught using a bot for commitments will lose deal access on BG. Thank you for supporting our efforts to enhance the BG user experience. We’re committed to making the platform better for everyone",
     },
     {
-      name: 'BG Deals Commitment Update',
-      des: 'As many of you know, your user tier increases as you place more orders with us, allowing access to higher-tier levels and higher limits on deals. Consistent accuracy in your commitments helps you maintain and improve your tier level for deal participation. In response to your feedback, we’re implementing measures to address bot activity and ensure fair access to deals. Users who frequently commit but don’t complete orders may see their tier level decrease, creating more opportunities for other buyers. Additionally, any account caught using a bot for commitments will lose deal access on BG. Thank you for supporting our efforts to enhance the BG user experience. We’re committed to making the platform better for everyone',
+      name: "BG Deals Commitment Update",
+      des: "As many of you know, your user tier increases as you place more orders with us, allowing access to higher-tier levels and higher limits on deals. Consistent accuracy in your commitments helps you maintain and improve your tier level for deal participation. In response to your feedback, we’re implementing measures to address bot activity and ensure fair access to deals. Users who frequently commit but don’t complete orders may see their tier level decrease, creating more opportunities for other buyers. Additionally, any account caught using a bot for commitments will lose deal access on BG. Thank you for supporting our efforts to enhance the BG user experience. We’re committed to making the platform better for everyone",
     },
   ];
 
   const dataCommitments = [
     {
-      name: 'AMAZON-ECHO-POP-LAVENDER-BLOOM-4804',
-      price: '$55.47',
+      name: "AMAZON-ECHO-POP-LAVENDER-BLOOM-4804",
+      price: "$55.47",
       active: true,
-      img: 'https://i5.walmartimages.com/asr/fff458b8-4eff-491d-af67-34968fe58531.57b1a2f9f198a430353cf8bde1c1ed80.jpeg?odnHeight=450&odnWidth=450&odnBg=ffffff',
+      img: "https://i5.walmartimages.com/asr/fff458b8-4eff-491d-af67-34968fe58531.57b1a2f9f198a430353cf8bde1c1ed80.jpeg?odnHeight=450&odnWidth=450&odnBg=ffffff",
     },
     {
-      name: 'AMAZON-ECHO-POP-LAVENDER-BLOOM-4804',
-      price: '$1120',
+      name: "AMAZON-ECHO-POP-LAVENDER-BLOOM-4804",
+      price: "$1120",
       active: true,
-      img: 'https://i5.walmartimages.com/asr/fff458b8-4eff-491d-af67-34968fe58531.57b1a2f9f198a430353cf8bde1c1ed80.jpeg?odnHeight=450&odnWidth=450&odnBg=ffffff',
+      img: "https://i5.walmartimages.com/asr/fff458b8-4eff-491d-af67-34968fe58531.57b1a2f9f198a430353cf8bde1c1ed80.jpeg?odnHeight=450&odnWidth=450&odnBg=ffffff",
     },
   ];
 
   const dataProd = [
     {
-      img: 'https://i5.walmartimages.com/asr/fff458b8-4eff-491d-af67-34968fe58531.57b1a2f9f198a430353cf8bde1c1ed80.jpeg?odnHeight=450&odnWidth=450&odnBg=ffffff',
-      name: 'Dualsense Wireless Controller For Playstation 5 - Fortnite Limited Edition',
-      price: '$19.00',
-      tag: 'Below',
-      time: 'ED 11-23-2024',
+      img: "https://i5.walmartimages.com/asr/fff458b8-4eff-491d-af67-34968fe58531.57b1a2f9f198a430353cf8bde1c1ed80.jpeg?odnHeight=450&odnWidth=450&odnBg=ffffff",
+      name: "Dualsense Wireless Controller For Playstation 5 - Fortnite Limited Edition",
+      price: "$19.00",
+      tag: "Below",
+      time: "ED 11-23-2024",
       brand: [
         {
-          name: 'Amazon',
-          img: 'https://logo.clearbit.com/amazon.com',
+          name: "Amazon",
+          img: "https://logo.clearbit.com/amazon.com",
         },
         {
-          name: 'Amazon',
-          img: 'https://logo.clearbit.com/amazon.com',
+          name: "Amazon",
+          img: "https://logo.clearbit.com/amazon.com",
         },
       ],
     },
     {
-      img: 'https://i5.walmartimages.com/asr/fff458b8-4eff-491d-af67-34968fe58531.57b1a2f9f198a430353cf8bde1c1ed80.jpeg?odnHeight=450&odnWidth=450&odnBg=ffffff',
-      name: 'Dualsense Wireless Controller For Playstation 5 - Fortnite Limited Edition',
-      price: '$19.00',
-      tag: 'Below',
-      time: 'ED 11-23-2024',
+      img: "https://i5.walmartimages.com/asr/fff458b8-4eff-491d-af67-34968fe58531.57b1a2f9f198a430353cf8bde1c1ed80.jpeg?odnHeight=450&odnWidth=450&odnBg=ffffff",
+      name: "Dualsense Wireless Controller For Playstation 5 - Fortnite Limited Edition",
+      price: "$19.00",
+      tag: "Below",
+      time: "ED 11-23-2024",
       brand: [
         {
-          name: 'Amazon',
-          img: 'https://logo.clearbit.com/amazon.com',
+          name: "Amazon",
+          img: "https://logo.clearbit.com/amazon.com",
         },
         {
-          name: 'Amazon',
-          img: 'https://logo.clearbit.com/amazon.com',
+          name: "Amazon",
+          img: "https://logo.clearbit.com/amazon.com",
         },
       ],
     },
     {
-      img: 'https://i5.walmartimages.com/asr/fff458b8-4eff-491d-af67-34968fe58531.57b1a2f9f198a430353cf8bde1c1ed80.jpeg?odnHeight=450&odnWidth=450&odnBg=ffffff',
-      name: 'Dualsense Wireless Controller For Playstation 5 - Fortnite Limited Edition',
-      price: '$19.00',
-      tag: 'Below',
-      time: 'ED 11-23-2024',
+      img: "https://i5.walmartimages.com/asr/fff458b8-4eff-491d-af67-34968fe58531.57b1a2f9f198a430353cf8bde1c1ed80.jpeg?odnHeight=450&odnWidth=450&odnBg=ffffff",
+      name: "Dualsense Wireless Controller For Playstation 5 - Fortnite Limited Edition",
+      price: "$19.00",
+      tag: "Below",
+      time: "ED 11-23-2024",
       brand: [
         {
-          name: 'Amazon',
-          img: 'https://logo.clearbit.com/amazon.com',
+          name: "Amazon",
+          img: "https://logo.clearbit.com/amazon.com",
         },
         {
-          name: 'Amazon',
-          img: 'https://logo.clearbit.com/amazon.com',
+          name: "Amazon",
+          img: "https://logo.clearbit.com/amazon.com",
         },
       ],
     },
     {
-      img: 'https://i5.walmartimages.com/asr/fff458b8-4eff-491d-af67-34968fe58531.57b1a2f9f198a430353cf8bde1c1ed80.jpeg?odnHeight=450&odnWidth=450&odnBg=ffffff',
-      name: 'Dualsense Wireless Controller For Playstation 5 - Fortnite Limited Edition',
-      price: '$19.00',
-      tag: 'Below',
-      time: 'ED 11-23-2024',
+      img: "https://i5.walmartimages.com/asr/fff458b8-4eff-491d-af67-34968fe58531.57b1a2f9f198a430353cf8bde1c1ed80.jpeg?odnHeight=450&odnWidth=450&odnBg=ffffff",
+      name: "Dualsense Wireless Controller For Playstation 5 - Fortnite Limited Edition",
+      price: "$19.00",
+      tag: "Below",
+      time: "ED 11-23-2024",
       brand: [
         {
-          name: 'Amazon',
-          img: 'https://logo.clearbit.com/amazon.com',
+          name: "Amazon",
+          img: "https://logo.clearbit.com/amazon.com",
         },
         {
-          name: 'Amazon',
-          img: 'https://logo.clearbit.com/amazon.com',
+          name: "Amazon",
+          img: "https://logo.clearbit.com/amazon.com",
         },
       ],
     },
     {
-      img: 'https://i5.walmartimages.com/asr/fff458b8-4eff-491d-af67-34968fe58531.57b1a2f9f198a430353cf8bde1c1ed80.jpeg?odnHeight=450&odnWidth=450&odnBg=ffffff',
-      name: 'Dualsense Wireless Controller For Playstation 5 - Fortnite Limited Edition',
-      price: '$19.00',
-      tag: 'Below',
-      time: 'ED 11-23-2024',
+      img: "https://i5.walmartimages.com/asr/fff458b8-4eff-491d-af67-34968fe58531.57b1a2f9f198a430353cf8bde1c1ed80.jpeg?odnHeight=450&odnWidth=450&odnBg=ffffff",
+      name: "Dualsense Wireless Controller For Playstation 5 - Fortnite Limited Edition",
+      price: "$19.00",
+      tag: "Below",
+      time: "ED 11-23-2024",
       brand: [
         {
-          name: 'Amazon',
-          img: 'https://logo.clearbit.com/amazon.com',
+          name: "Amazon",
+          img: "https://logo.clearbit.com/amazon.com",
         },
         {
-          name: 'Amazon',
-          img: 'https://logo.clearbit.com/amazon.com',
+          name: "Amazon",
+          img: "https://logo.clearbit.com/amazon.com",
         },
       ],
     },
     {
-      img: 'https://i5.walmartimages.com/asr/fff458b8-4eff-491d-af67-34968fe58531.57b1a2f9f198a430353cf8bde1c1ed80.jpeg?odnHeight=450&odnWidth=450&odnBg=ffffff',
-      name: 'Dualsense Wireless Controller For Playstation 5 - Fortnite Limited Edition',
-      price: '$19.00',
-      tag: 'Below',
-      time: 'ED 11-23-2024',
+      img: "https://i5.walmartimages.com/asr/fff458b8-4eff-491d-af67-34968fe58531.57b1a2f9f198a430353cf8bde1c1ed80.jpeg?odnHeight=450&odnWidth=450&odnBg=ffffff",
+      name: "Dualsense Wireless Controller For Playstation 5 - Fortnite Limited Edition",
+      price: "$19.00",
+      tag: "Below",
+      time: "ED 11-23-2024",
       brand: [
         {
-          name: 'Amazon',
-          img: 'https://logo.clearbit.com/amazon.com',
+          name: "Amazon",
+          img: "https://logo.clearbit.com/amazon.com",
         },
         {
-          name: 'Amazon',
-          img: 'https://logo.clearbit.com/amazon.com',
+          name: "Amazon",
+          img: "https://logo.clearbit.com/amazon.com",
         },
       ],
     },
     {
-      img: 'https://i5.walmartimages.com/asr/fff458b8-4eff-491d-af67-34968fe58531.57b1a2f9f198a430353cf8bde1c1ed80.jpeg?odnHeight=450&odnWidth=450&odnBg=ffffff',
-      name: 'Dualsense Wireless Controller For Playstation 5 - Fortnite Limited Edition',
-      price: '$19.00',
-      tag: 'Below',
-      time: 'ED 11-23-2024',
+      img: "https://i5.walmartimages.com/asr/fff458b8-4eff-491d-af67-34968fe58531.57b1a2f9f198a430353cf8bde1c1ed80.jpeg?odnHeight=450&odnWidth=450&odnBg=ffffff",
+      name: "Dualsense Wireless Controller For Playstation 5 - Fortnite Limited Edition",
+      price: "$19.00",
+      tag: "Below",
+      time: "ED 11-23-2024",
       brand: [
         {
-          name: 'Amazon',
-          img: 'https://logo.clearbit.com/amazon.com',
+          name: "Amazon",
+          img: "https://logo.clearbit.com/amazon.com",
         },
         {
-          name: 'Amazon',
-          img: 'https://logo.clearbit.com/amazon.com',
+          name: "Amazon",
+          img: "https://logo.clearbit.com/amazon.com",
         },
       ],
     },
     {
-      img: 'https://i5.walmartimages.com/asr/fff458b8-4eff-491d-af67-34968fe58531.57b1a2f9f198a430353cf8bde1c1ed80.jpeg?odnHeight=450&odnWidth=450&odnBg=ffffff',
-      name: 'Dualsense Wireless Controller For Playstation 5 - Fortnite Limited Edition',
-      price: '$19.00',
-      tag: 'Below',
-      time: 'ED 11-23-2024',
+      img: "https://i5.walmartimages.com/asr/fff458b8-4eff-491d-af67-34968fe58531.57b1a2f9f198a430353cf8bde1c1ed80.jpeg?odnHeight=450&odnWidth=450&odnBg=ffffff",
+      name: "Dualsense Wireless Controller For Playstation 5 - Fortnite Limited Edition",
+      price: "$19.00",
+      tag: "Below",
+      time: "ED 11-23-2024",
       brand: [
         {
-          name: 'Amazon',
-          img: 'https://logo.clearbit.com/amazon.com',
+          name: "Amazon",
+          img: "https://logo.clearbit.com/amazon.com",
         },
         {
-          name: 'Amazon',
-          img: 'https://logo.clearbit.com/amazon.com',
+          name: "Amazon",
+          img: "https://logo.clearbit.com/amazon.com",
         },
       ],
     },
@@ -183,21 +183,21 @@ const Home = () => {
 
   const dataReport = [
     {
-      img: 'https://buyinggroup.com/static/media/dashboard_container_filled.1a79ce62.svg',
-      name: 'Add tracking number',
+      img: "https://buyinggroup.com/static/media/dashboard_container_filled.1a79ce62.svg",
+      name: "Add tracking number",
     },
     {
-      img: 'https://buyinggroup.com/static/media/dashboard_container_filled.1a79ce62.svg',
-      name: 'Request Shipping Label',
+      img: "https://buyinggroup.com/static/media/dashboard_container_filled.1a79ce62.svg",
+      name: "Request Shipping Label",
     },
     {
-      img: 'https://buyinggroup.com/static/media/dashboard_container_filled.1a79ce62.svg',
-      name: 'Request Payment',
+      img: "https://buyinggroup.com/static/media/dashboard_container_filled.1a79ce62.svg",
+      name: "Request Payment",
     },
 
     {
-      img: 'https://buyinggroup.com/static/media/dashboard_container_filled.1a79ce62.svg',
-      name: 'Payment Details',
+      img: "https://buyinggroup.com/static/media/dashboard_container_filled.1a79ce62.svg",
+      name: "Payment Details",
     },
   ];
 
@@ -364,7 +364,7 @@ const Home = () => {
           <Swiper
             spaceBetween={12}
             slidesPerView={sizeWidth}
-            onSlideChange={() => console.log('slide change')}
+            onSlideChange={() => console.log("slide change")}
             onSwiper={(swiper) => console.log(swiper)}
           >
             {dataProd.map((e, i) => (
@@ -377,12 +377,12 @@ const Home = () => {
 
         {/* table - commit */}
         <Row gutter={[16, 16]} className={styles.m1}>
-          <Col xs={24} sm={24} md={24} lg={12}>
+          {/* <Col xs={24} sm={24} md={24} lg={12}>
             <div className={styles.table}>
               <span className={styles.headerText}>My Orders</span>
               <DataTable />
             </div>
-          </Col>
+          </Col> */}
           <Col xs={24} sm={24} md={24} lg={12}>
             <div className={styles.lastCommit}>
               <span className={styles.headerText}>Last Commitments</span>
