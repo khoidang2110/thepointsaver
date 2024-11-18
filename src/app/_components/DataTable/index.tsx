@@ -1,8 +1,9 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { Flex, Table } from "antd";
 import type { TableColumnsType, TableProps } from "antd";
 import styles from "./styles.module.scss";
+import { Tools } from "../Tools";
 
 interface DataType {
   key: React.Key;
@@ -195,13 +196,35 @@ const onChange: TableProps<DataType>["onChange"] = (pagination, filters, sorter,
   console.log("params", pagination, filters, sorter, extra);
 };
 
-const DataTable: React.FC = () => (
-  <Table<DataType>
-    columns={columns}
-    dataSource={data}
-    onChange={onChange}
-    showSorterTooltip={{ target: "sorter-icon" }}
-  />
-);
+const DataTable: React.FC = () => {
+  const [dataTools, setDataTools] = useState<any>([
+    {
+      name: "search",
+      img: "https://logo.clearbit.com/amazon.com",
+      active: false,
+    },
+    { name: "calender", img: "https://logo.clearbit.com/amazon.com", active: false },
+
+    { name: "sum", img: "https://logo.clearbit.com/amazon.com", active: false },
+    {
+      name: "close",
+      img: "https://logo.clearbit.com/amazon.com",
+      active: false,
+    },
+  ]);
+  return (
+    <>
+      <Table<DataType>
+        columns={columns}
+        dataSource={data}
+        onChange={onChange}
+        showSorterTooltip={{ target: "sorter-icon" }}
+      />
+      <Tools data={dataTools} setDataTools={setDataTools}>
+        <div></div>
+      </Tools>
+    </>
+  );
+};
 
 export default DataTable;
