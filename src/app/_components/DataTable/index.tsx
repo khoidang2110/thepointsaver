@@ -4,6 +4,7 @@ import { Flex, Table } from "antd";
 import type { TableColumnsType, TableProps } from "antd";
 import styles from "./styles.module.scss";
 import { Tools } from "../Tools";
+import "../styles.scss";
 
 interface DataType {
   key: React.Key;
@@ -26,6 +27,7 @@ const columns: TableColumnsType<DataType> = [
   {
     title: "Deal",
     dataIndex: "deal",
+    width: "500px",
     sorter: (a, b) => {
       if (a.deal < b.deal) {
         return -1;
@@ -202,8 +204,54 @@ const DataTable: React.FC = () => {
       name: "search",
       img: "https://logo.clearbit.com/amazon.com",
       active: false,
+      dataForm: [
+        {
+          category: "Search",
+          dataSearch: [{ name: "CommitmentID" }, { name: "DealID" }, { name: "Item" }],
+        },
+        {
+          category: "Status",
+          dataStatus: [
+            { name: "Active" },
+            { name: "Expired" },
+            { name: "Fulfilled" },
+            { name: "Partially Fulfilled" },
+            { name: "Voided" },
+          ],
+        },
+        {
+          category: "Tracking Link Required",
+          dataTracking: [{ name: "All" }, { name: "Y" }, { name: "N" }],
+        },
+      ],
     },
-    { name: "calender", img: "https://logo.clearbit.com/amazon.com", active: false },
+    {
+      name: "calender",
+      img: "https://logo.clearbit.com/amazon.com",
+      active: false,
+      dataForm: [
+        {
+          category: "Period",
+          dataPeriod: [
+            {
+              data: [
+                { time: "Today" },
+                { time: "Last 3 days" },
+                { time: "This Week" },
+                { time: "Last 7 days" },
+                { time: "This 10 days" },
+                { time: "This Month" },
+                { time: "Last 30 days" },
+                { time: "Last 3 months" },
+                { time: "This Year" },
+                { time: "Last Year" },
+              ],
+              dateTime: "Date",
+            },
+          ],
+        },
+      ],
+    },
 
     { name: "sum", img: "https://logo.clearbit.com/amazon.com", active: false },
     {
@@ -219,10 +267,11 @@ const DataTable: React.FC = () => {
         dataSource={data}
         onChange={onChange}
         showSorterTooltip={{ target: "sorter-icon" }}
+        tableLayout="fixed"
+        scroll={{ x: 1400 }}
+        style={{ width: 1400, minWidth: "100%" }}
       />
-      <Tools data={dataTools} setDataTools={setDataTools}>
-        <div></div>
-      </Tools>
+      <Tools data={dataTools} setDataTools={setDataTools} />
     </>
   );
 };

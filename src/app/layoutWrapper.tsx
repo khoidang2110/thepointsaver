@@ -90,7 +90,7 @@ const LayoutWrapper = ({ children }: { children: React.ReactNode }) => {
       router.push("/orders");
     }),
   ];
-
+  console.log("size.width", size.width);
   // Check if current route is login or register to conditionally render Sider and Header
   const isAuthRoute = pathname === "/login" || pathname === "/register" || pathname === "/admin";
 

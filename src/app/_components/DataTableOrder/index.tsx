@@ -4,7 +4,7 @@ import React from "react";
 import { Flex, Table } from "antd";
 import type { TableColumnsType, TableProps } from "antd";
 import styles from "./styles.module.scss";
-
+import "../styles.scss";
 interface DataType {
   orderId: string;
   trackId: string;
@@ -23,6 +23,7 @@ const columns: TableColumnsType<DataType> = [
   {
     title: "Order Id",
     dataIndex: "orderId",
+    width: "200px",
     sorter: (a, b) => {
       if (a.orderId < b.orderId) {
         return -1;
@@ -66,6 +67,7 @@ const columns: TableColumnsType<DataType> = [
   {
     title: "Status",
     dataIndex: "status",
+    width: "180px",
     sorter: (a, b) => {
       if (a.status < b.status) {
         return -1;
@@ -200,6 +202,9 @@ const DataTableOrder: React.FC = () => (
     dataSource={data}
     onChange={onChange}
     showSorterTooltip={{ target: "sorter-icon" }}
+    tableLayout="fixed"
+    scroll={{ x: 1400 }}
+    style={{ width: 1400, minWidth: "100%" }}
   />
 );
 
