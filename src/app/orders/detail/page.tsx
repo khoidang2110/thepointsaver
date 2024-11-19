@@ -1,5 +1,5 @@
+import DataTableOrder from "@/app/_components/DataTableOrder";
 import React from "react";
-import DataTableOrder from "../_components/DataTableOrder";
 
 export default function page() {
   return (

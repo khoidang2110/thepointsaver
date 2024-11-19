@@ -5,6 +5,7 @@ import { Flex, Table } from "antd";
 import type { TableColumnsType, TableProps } from "antd";
 import styles from "./styles.module.scss";
 import "../styles.scss";
+import styled from "styled-components";
 interface DataType {
   orderId: string;
   trackId: string;
@@ -191,6 +192,21 @@ const data = [
     modifiedDate: "11-30-2024",
   },
 ];
+
+const StyledTable = styled(Table)`
+  .ant-modal-content {
+    padding: 0px; /* Adjust the padding as needed */
+  }
+  .ant-modal-header {
+    padding: 20px;
+    margin-bottom: 0px;
+  }
+  .ant-modal-title {
+    font-weight: 400;
+    font-size: 18px !important;
+    line-height: 22px !important;
+  }
+`;
 
 const onChange: TableProps<DataType>["onChange"] = (pagination, filters, sorter, extra) => {
   console.log("params", pagination, filters, sorter, extra);

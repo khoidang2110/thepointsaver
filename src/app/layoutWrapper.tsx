@@ -13,18 +13,20 @@ import type { MenuProps } from "antd";
 import { useRouter, usePathname } from "next/navigation";
 import { useWindowSize } from "./_utils";
 import styles from "./styles.module.scss";
+import Link from "next/link";
 
 const { Header, Content, Sider } = Layout;
 
-type MenuItem = Required<MenuProps>["items"][number];
-function getItem(
-  label: React.ReactNode,
-  key: React.Key,
-  icon?: React.ReactNode,
-  onClick?: () => void,
-): MenuItem {
-  return { key, icon, label, onClick } as MenuItem;
-}
+// type MenuItem = Required<MenuProps>["items"][number];
+// function getItem(
+//   label: React.ReactNode,
+//   key: React.Key,
+//   icon?: React.ReactNode,
+//   name?: string,
+//   onClick?: () => void,
+// ): MenuItem {
+//   return { key, icon, label, onClick, name } as MenuItem;
+// }
 
 const LayoutWrapper = ({ children }: { children: React.ReactNode }) => {
   const size = useWindowSize();
@@ -39,61 +41,50 @@ const LayoutWrapper = ({ children }: { children: React.ReactNode }) => {
   };
 
   const [collapsed, setCollapsed] = useState(false);
-  const router = useRouter();
   const pathname = usePathname();
 
-  // Set initial `selectedKey` based on `pathname`
-  const [selectedKey, setSelectedKey] = useState(() => {
-    switch (pathname) {
-      case "/deals":
-        return "2";
-      case "/commitments":
-        return "3";
-      case "/orders":
-        return "4";
-      default:
-        return "1";
-    }
-  });
-
-  useEffect(() => {
-    switch (pathname) {
-      case "/":
-        setSelectedKey("1");
-        break;
-      case "/deals":
-        setSelectedKey("2");
-        break;
-      case "/commitments":
-        setSelectedKey("3");
-        break;
-      case "/orders":
-        setSelectedKey("4");
-        break;
-      default:
-        setSelectedKey("1");
-        break;
-    }
-  }, [pathname]);
-
-  const items: MenuItem[] = [
-    getItem("Dashboard", "1", <PieChartOutlined />, () => {
-      router.push("/");
-    }),
-    getItem("Deals", "2", <DollarOutlined />, () => {
-      router.push("/deals");
-    }),
-    getItem("My Commitments", "3", <LinkOutlined />, () => {
-      router.push("/commitments");
-    }),
-    getItem("Orders", "4", <DropboxOutlined />, () => {
-      router.push("/orders");
-    }),
+  const items = [
+    { key: "1", icon: <PieChartOutlined />, label: "Dashboard", name: "/" },
+    { key: "2", icon: <DollarOutlined />, label: "Deals", name: "deals" },
+    { key: "3", icon: <LinkOutlined />, label: "My Commitments", name: "commitments" },
+    {
+      key: "sub1",
+      label: "Orders",
+      icon: <DropboxOutlined />,
+      name: "orders",
+      children: [
+        { key: "5", label: "My Orders", name: "myorders" },
+        { key: "6", label: "Orders Details", name: "detail" },
+        { key: "7", label: "Orders Analytics", name: "analytics" },
+        { key: "8", label: "Order Price Dispute", name: "disputes" },
+      ],
+    },
   ];
-  console.log("size.width", size.width);
+
   // Check if current route is login or register to conditionally render Sider and Header
   const isAuthRoute = pathname === "/login" || pathname === "/register" || pathname === "/admin";
 
+  const renderMenu = () => {
+    return (
+      <Menu mode="inline" onClick={onClose}>
+        {items.map((item: any) =>
+          item?.children ? (
+            <Menu.SubMenu key={item.key} icon={item.icon} title={item.label}>
+              {item.children.map((child: any) => (
+                <Menu.Item key={child.key}>
+                  <Link href={`/orders/${child.name}`}>{child.label}</Link>
+                </Menu.Item>
+              ))}
+            </Menu.SubMenu>
+          ) : (
+            <Menu.Item key={item.key} icon={item.icon}>
+              <Link href={`/${item.name}`}>{item.label}</Link>
+            </Menu.Item>
+          ),
+        )}
+      </Menu>
+    );
+  };
   return (
     <ConfigProvider
       theme={{
@@ -138,7 +129,6 @@ const LayoutWrapper = ({ children }: { children: React.ReactNode }) => {
               <p>hello</p>
             </span>
           </Header>
-
           <Layout style={{ marginTop: 64 }}>
             {size.width > 900 ? (
               <Sider
@@ -157,7 +147,7 @@ const LayoutWrapper = ({ children }: { children: React.ReactNode }) => {
                   borderRadius: 12,
                 }}
               >
-                <Menu theme="light" selectedKeys={[selectedKey]} mode="inline" items={items} />
+                {renderMenu()}
               </Sider>
             ) : (
               <Drawer
@@ -169,15 +159,7 @@ const LayoutWrapper = ({ children }: { children: React.ReactNode }) => {
                 key="left"
                 style={{ padding: 0! }}
               >
-                <Menu
-                  onClick={() => {
-                    onClose();
-                  }}
-                  theme="light"
-                  selectedKeys={[selectedKey]}
-                  mode="inline"
-                  items={items}
-                />
+                {renderMenu()}
               </Drawer>
             )}
 
@@ -202,7 +184,7 @@ const LayoutWrapper = ({ children }: { children: React.ReactNode }) => {
           </Layout>
         </Layout>
       ) : (
-        <>
+        <Layout>
           {children}
           {/* <Row align="middle">
             <Col xs={24} sm={24} md={24} lg={8} xl={8}>
@@ -241,7 +223,7 @@ const LayoutWrapper = ({ children }: { children: React.ReactNode }) => {
               </Flex>
             </Col>
           </Row> */}
-        </>
+        </Layout>
       )}
     </ConfigProvider>
   );
