@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./styles.module.scss";
 import { Col, Row, Flex } from "antd";
-import DataTable from "./_components/DataTable";
 import ProductDetail from "./_components/ProductDetail";
 import { Swiper, SwiperSlide } from "swiper/react";
 

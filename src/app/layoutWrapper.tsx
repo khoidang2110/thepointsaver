@@ -1,19 +1,19 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import { Layout, Menu, Button, ConfigProvider, Drawer, Row, Col, Flex } from "antd";
 import {
+  DollarOutlined,
+  DropboxOutlined,
+  LinkOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   PieChartOutlined,
-  DollarOutlined,
-  LinkOutlined,
-  DropboxOutlined,
 } from "@ant-design/icons";
-import type { MenuProps } from "antd";
-import { useRouter, usePathname } from "next/navigation";
-import { useWindowSize } from "./_utils";
-import styles from "./styles.module.scss";
+import { Button, ConfigProvider, Drawer, Layout, Menu } from "antd";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import React, { useState } from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useWindowSize } from "./_utils";
 
 const { Header, Content, Sider } = Layout;
 
@@ -99,6 +99,8 @@ const LayoutWrapper = ({ children }: { children: React.ReactNode }) => {
         },
       }}
     >
+      <ToastContainer />
+
       {!isAuthRoute ? (
         <Layout style={{ minHeight: "100vh" }}>
           <Header

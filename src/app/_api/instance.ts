@@ -9,7 +9,7 @@ function getUrl(config: any) {
 
 export const instance = axios.create({
   timeout: 60000,
-  baseURL: `${process.env.NEXT_PUBLIC_API_URL_1}`,
+  baseURL: `${process.env.NEXT_PUBLIC_API_URL}`,
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",

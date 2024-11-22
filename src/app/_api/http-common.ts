@@ -1,10 +1,10 @@
-import axios from 'axios';
-import axiosInterceptor from './axiosInterceptor';
+import axios from "axios";
+import axiosInterceptor from "./axiosInterceptor";
 
 const http = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL_1,
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
   headers: {
-    'Content-type': 'application/json',
+    "Content-type": "application/json",
   },
 });
 

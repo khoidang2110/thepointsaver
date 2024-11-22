@@ -37,9 +37,9 @@ const columns: TableColumnsType<DataType> = [
     render: (text, record) => {
       return (
         <>
-          <span>{record?.orderId}</span>
-          <span>Track. No.</span>
-          <span>Alt Track No</span>
+          <a className={styles.text}>{record?.orderId}</a>
+          <span className={styles.subTextOrder}>Track. No.</span>
+          <span className={styles.subTextOrder}>Alt Track No</span>
         </>
       );
     },
