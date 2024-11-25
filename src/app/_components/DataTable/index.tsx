@@ -202,7 +202,7 @@ const DataTable: React.FC = () => {
   const [dataTools, setDataTools] = useState<any>([
     {
       name: "search",
-      img: "fa fa-search",
+      img: "/search.svg",
       active: false,
       dataForm: [
         {
@@ -227,7 +227,7 @@ const DataTable: React.FC = () => {
     },
     {
       name: "calender",
-      img: "https://logo.clearbit.com/amazon.com",
+      img: "/calendar.svg",
       active: false,
       dataForm: [
         {
@@ -253,10 +253,10 @@ const DataTable: React.FC = () => {
       ],
     },
 
-    { name: "sum", img: "https://logo.clearbit.com/amazon.com", active: false },
+    { name: "sum", img: "/card.svg", active: false },
     {
       name: "close",
-      img: "https://logo.clearbit.com/amazon.com",
+      img: "/close.svg",
       active: false,
     },
   ]);

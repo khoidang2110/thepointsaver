@@ -1,0 +1,18 @@
+$gray1: rgb(175, 175, 175);
+
+.red {
+  color: red;
+  margin-left: 10px;
+}
+.p10 {
+  padding: 16px 24px;
+}
+.form {
+  border-bottom: 1px solid $gray1;
+  border-top: 1px solid $gray1;
+}
+.subtext {
+  color: $gray1;
+  margin: 0 10px 10px 0;
+  font-weight: 700;
+}

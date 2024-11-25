@@ -152,7 +152,12 @@ const LayoutWrapper = ({ children }: { children: React.ReactNode }) => {
           </Layout>
         </Layout>
       ) : (
-        <Layout>
+        <Layout style={{ minHeight: "100vh" }}>
+          <div>
+            <div className={styles.logoFooter}>
+              <img src="https://buyinggroup.com/static/media/BuyingGroup-Logo.f4da503f.svg" />
+            </div>
+          </div>
           {children}
           <Row align="middle">
             <Col xs={24} sm={24} md={24} lg={8} xl={8}>

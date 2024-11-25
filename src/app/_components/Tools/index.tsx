@@ -29,7 +29,7 @@ export const Tools = ({ data, setDataTools }: any) => {
               className={styles.toolsItem}
             >
               <div className={styles.boxImg}>
-                <i className={`${e.img}`} />
+                <img src={`${e.img}`} />
               </div>
             </div>
             {e?.active && <Form data={e.dataForm} />}
