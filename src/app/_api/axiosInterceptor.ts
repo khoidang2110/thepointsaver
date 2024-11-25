@@ -10,7 +10,7 @@ const axiosInterceptor = {
 
         let token = localStorage.getItem("authUser");
         if (token) {
-          config.headers["Authorization"] = `Bearer ${token}`;
+          config.headers["auth_token"] = `${token}`;
         }
 
         if (isFormData) {
@@ -19,19 +19,23 @@ const axiosInterceptor = {
         return config;
       },
       (error: any) => {
+        console.log("error", error);
         return Promise.reject(error);
       },
     );
     axios.interceptors.response.use(
-      (response: any) => successHandler(response),
-      (error: any) => errorHandler(error),
+      (response: any) => {
+        return response;
+      },
+      (error: any) => {
+        if (error.status === 401) {
+          // localStorage.removeItem("authUser");
+          // window.location.href = "/login";
+          // return Promise.reject(error);
+        }
+        return error;
+      },
     );
-    const errorHandler = (error: any) => {
-      return Promise.reject({ ...error });
-    };
-    const successHandler = (response: any) => {
-      return response;
-    };
   },
 };
 

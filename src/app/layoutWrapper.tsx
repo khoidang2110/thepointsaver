@@ -7,26 +7,18 @@ import {
   MenuUnfoldOutlined,
   PieChartOutlined,
 } from "@ant-design/icons";
-import { Button, ConfigProvider, Drawer, Layout, Menu } from "antd";
+
+import { Button, Col, ConfigProvider, Drawer, Flex, Layout, Menu, Row } from "antd";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useWindowSize } from "./_utils";
+import styles from "./styles.module.scss";
+import HeaderAuth from "./_components/HeaderAuth";
 
 const { Header, Content, Sider } = Layout;
-
-// type MenuItem = Required<MenuProps>["items"][number];
-// function getItem(
-//   label: React.ReactNode,
-//   key: React.Key,
-//   icon?: React.ReactNode,
-//   name?: string,
-//   onClick?: () => void,
-// ): MenuItem {
-//   return { key, icon, label, onClick, name } as MenuItem;
-// }
 
 const LayoutWrapper = ({ children }: { children: React.ReactNode }) => {
   const size = useWindowSize();
@@ -85,6 +77,7 @@ const LayoutWrapper = ({ children }: { children: React.ReactNode }) => {
       </Menu>
     );
   };
+
   return (
     <ConfigProvider
       theme={{
@@ -103,34 +96,7 @@ const LayoutWrapper = ({ children }: { children: React.ReactNode }) => {
 
       {!isAuthRoute ? (
         <Layout style={{ minHeight: "100vh" }}>
-          <Header
-            style={{
-              position: "fixed",
-              zIndex: 10,
-              width: "100%",
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              height: "45px",
-              padding: "0 25px",
-              background: "#fff",
-            }}
-          >
-            <span className="flex items-center">
-              <Button
-                type="text"
-                icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-                onClick={() => {
-                  size.width > 768 ? setCollapsed(!collapsed) : showDrawer();
-                }}
-                style={{ fontSize: "16px", width: 42, height: 42 }}
-              />
-              <p>The Point Saver</p>
-            </span>
-            <span className="flex" style={{ fontWeight: "600", fontSize: "12px" }}>
-              <p>hello</p>
-            </span>
-          </Header>
+          <HeaderAuth showDrawer={showDrawer} collapsed={collapsed} setCollapsed={setCollapsed} />
           <Layout style={{ marginTop: 64 }}>
             {size.width > 900 ? (
               <Sider
@@ -188,7 +154,7 @@ const LayoutWrapper = ({ children }: { children: React.ReactNode }) => {
       ) : (
         <Layout>
           {children}
-          {/* <Row align="middle">
+          <Row align="middle">
             <Col xs={24} sm={24} md={24} lg={8} xl={8}>
               <div className={styles.logoFooter}>
                 <img src="https://buyinggroup.com/static/media/BuyingGroup-Logo.f4da503f.svg" />
@@ -224,7 +190,20 @@ const LayoutWrapper = ({ children }: { children: React.ReactNode }) => {
                 </div>
               </Flex>
             </Col>
-          </Row> */}
+          </Row>
+          <Row>
+            <Flex className={styles.footer}>
+              <div className={styles.copyRight}>
+                <span> 2024 The Point Saver. All rights reserved.</span>
+              </div>
+              <div className={styles.copyRight}>
+                <span> Terms & Conditions</span>
+              </div>
+              <div className={styles.copyRight}>
+                <span> Privacy Policy</span>
+              </div>
+            </Flex>
+          </Row>
         </Layout>
       )}
     </ConfigProvider>

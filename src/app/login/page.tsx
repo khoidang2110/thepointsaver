@@ -3,7 +3,7 @@ import { Button, Form, Input, Col, Row } from "antd";
 import React, { useState } from "react";
 import type { FormProps } from "antd";
 import styles from "./styles.module.scss";
-import { postLogin } from "../_api/AuthService";
+import { postLogin } from "../_api/UnAuthService";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import Loading from "../_components/Loading";
@@ -14,18 +14,15 @@ type FieldType = {
 };
 const Login = () => {
   const router = useRouter();
-  const [loading, setLoading] = useState<boolean>(false);
+
   const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
     (async () => {
-      setLoading(true);
       const res = await postLogin(values);
       if (res.status === 200) {
-        localStorage.setItem("authUser", res.data);
+        localStorage.setItem("authUser", res?.data?.token);
         router.push("/");
-        setLoading(false);
       } else {
         toast.error("password incorrect");
-        setLoading(false);
       }
     })();
   };
@@ -36,7 +33,6 @@ const Login = () => {
   const [form] = Form.useForm();
   return (
     <>
-      {loading && <Loading />}
       <Row className={styles.loginForm}>
         <Col xs={24} sm={24} md={24} lg={7} xl={7} xxl={7}>
           <div>
@@ -50,18 +46,18 @@ const Login = () => {
             onFinishFailed={onFinishFailed}
           >
             <Form.Item
-              label="Username"
-              name="username"
+              label="Email"
+              name="email"
               rules={[{ required: true, message: "Please input your username!" }]}
             >
-              <Input placeholder="username" />
+              <Input placeholder="email" />
             </Form.Item>
             <Form.Item
               label="Password"
               name="password"
               rules={[{ required: true, message: "Please input your password!" }]}
             >
-              <Input placeholder="password" />
+              <Input.Password placeholder="password" />
             </Form.Item>
             <div>
               <span className={styles.forgot}>forgot your password?</span>

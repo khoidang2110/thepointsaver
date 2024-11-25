@@ -236,6 +236,24 @@ $red2: #ffe5e6;
     height: 100%;
   }
 }
+.footer {
+  padding: 20px;
+  background: $primary;
+  color: $white;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+}
+.copyRight {
+  padding-right: 10px;
+  border-right: 1px solid $third;
+  padding-left: 10px;
+  &:nth-last-child(1) {
+    border-right: none;
+  }
+}
 
 @media screen and (max-width: 1023px) {
   .full {

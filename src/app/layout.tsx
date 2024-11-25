@@ -1,6 +1,8 @@
 import "./globals.css";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import LayoutWrapper from "./layoutWrapper";
+import { useEffect } from "react";
+import { getInfoUser } from "./_api/AuthService";
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (

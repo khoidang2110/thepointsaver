@@ -11,10 +11,19 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import { useWindowSize } from "./_utils";
+import { getAllProduct } from "./_api/AuthService";
 
 const Home = () => {
   const size = useWindowSize();
   const [sizeWidth, setSizeWidth] = useState<any>();
+
+  // useEffect(() => {
+  //   (async () => {
+  //     const res = await getAllProduct();
+  //     console.log("res", res);
+  //   })();
+  // }, []);
+
   const dataNoti = [
     {
       name: "BG Deals Commitment Update",

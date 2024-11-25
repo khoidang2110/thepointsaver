@@ -202,7 +202,7 @@ const DataTable: React.FC = () => {
   const [dataTools, setDataTools] = useState<any>([
     {
       name: "search",
-      img: "https://logo.clearbit.com/amazon.com",
+      img: "fa fa-search",
       active: false,
       dataForm: [
         {
