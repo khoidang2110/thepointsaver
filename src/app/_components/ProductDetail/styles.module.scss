@@ -56,7 +56,7 @@ $gray1: rgb(175, 175, 175);
   }
 }
 .textProduct {
-  font-size: 12px;
+  font-size: 14px;
   display: block;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -64,6 +64,7 @@ $gray1: rgb(175, 175, 175);
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   margin-top: 8px;
+  font-weight: 600;
 }
 .price {
   color: $primary;

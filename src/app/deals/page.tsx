@@ -2,7 +2,17 @@
 import { Col, Row, Tabs } from "antd";
 import FilterOptions from "../_components/FilterOptions";
 import ProductDetail from "../_components/ProductDetail";
+import { useEffect, useState } from "react";
+import { getAllDeal } from "../_api/AuthService";
 const Deals = () => {
+  const [dataDeals, setDataDeals] = useState<any>();
+  useEffect(() => {
+    (async () => {
+      const res = await getAllDeal();
+      setDataDeals(res?.data);
+    })();
+  }, []);
+  console.log("dataDeals", dataDeals);
   const dataProd = [
     {
       img: "https://i5.walmartimages.com/asr/fff458b8-4eff-491d-af67-34968fe58531.57b1a2f9f198a430353cf8bde1c1ed80.jpeg?odnHeight=450&odnWidth=450&odnBg=ffffff",
@@ -167,7 +177,7 @@ const Deals = () => {
           <TabPane tab={e.name} key={e.name}>
             <FilterOptions />
             <Row gutter={[16, 16]}>
-              {dataProd?.map((item, i) => (
+              {dataDeals?.map((item: any, i: any) => (
                 <Col key={i.toString()} xs={24} sm={24} md={12} lg={8} xl={6}>
                   <ProductDetail data={item} />
                 </Col>

@@ -11,7 +11,7 @@ import {
 import { Button, Col, ConfigProvider, Drawer, Flex, Layout, Menu, Row } from "antd";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useWindowSize } from "./_utils";
@@ -23,6 +23,7 @@ const { Header, Content, Sider } = Layout;
 const LayoutWrapper = ({ children }: { children: React.ReactNode }) => {
   const size = useWindowSize();
   const [open, setOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const showDrawer = () => {
     setOpen(true);
@@ -76,6 +77,31 @@ const LayoutWrapper = ({ children }: { children: React.ReactNode }) => {
         )}
       </Menu>
     );
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 40) {
+        // Adjust the scroll threshold as needed
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const handleMenu = () => {
+    if (collapsed) {
+      setOpen(false);
+    } else {
+      setOpen(true);
+    }
   };
 
   return (
@@ -153,13 +179,46 @@ const LayoutWrapper = ({ children }: { children: React.ReactNode }) => {
         </Layout>
       ) : (
         <Layout style={{ minHeight: "100vh" }}>
-          <div>
-            <div className={styles.logoFooter}>
+          <Flex align="center" className={isScrolled ? styles.header : styles.default}>
+            <div className={styles.logoHeader}>
               <img src="https://buyinggroup.com/static/media/BuyingGroup-Logo.f4da503f.svg" />
             </div>
-          </div>
+            {size.width > 1024 ? (
+              <>
+                <div>
+                  <Flex justify="space-around" align="center">
+                    <div>
+                      <span className={styles.textHeader}>Home</span>
+                    </div>
+                    <div>
+                      <span className={styles.textHeader}>About</span>
+                    </div>
+                    <div>
+                      <span className={styles.textHeader}>FAQs</span>
+                    </div>
+                    <div>
+                      <span className={styles.textHeader}>Contact Us</span>
+                    </div>
+                  </Flex>
+                </div>
+                <div>
+                  <Button className={styles.btnHeader} variant="outlined">
+                    Login
+                  </Button>
+                  <Button type="primary" className={styles.btnHeader}>
+                    Join Now
+                  </Button>
+                </div>
+              </>
+            ) : (
+              <div onClick={handleMenu}>
+                <img src="./menu.svg" />
+              </div>
+            )}
+          </Flex>
           {children}
-          <Row align="middle">
+
+          <Row align="middle" className={styles.subMenu}>
             <Col xs={24} sm={24} md={24} lg={8} xl={8}>
               <div className={styles.logoFooter}>
                 <img src="https://buyinggroup.com/static/media/BuyingGroup-Logo.f4da503f.svg" />
@@ -196,6 +255,7 @@ const LayoutWrapper = ({ children }: { children: React.ReactNode }) => {
               </Flex>
             </Col>
           </Row>
+
           <Row>
             <Flex className={styles.footer}>
               <div className={styles.copyRight}>

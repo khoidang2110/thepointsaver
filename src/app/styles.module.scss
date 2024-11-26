@@ -236,14 +236,65 @@ $red2: #ffe5e6;
     height: 100%;
   }
 }
+.default {
+  background-color: transparent;
+  box-shadow: unset;
+  width: 100%;
+  justify-content: space-between;
+  padding: 10px 100px;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  height: 100px !important;
+  min-height: 100px !important;
+  z-index: 10 !important;
+  position: fixed;
+  top: 0;
+}
+.header {
+  width: 100%;
+  justify-content: space-between;
+  background-color: white;
+  box-shadow: rgba(215, 215, 215, 0.25) 0px 4px 4px;
+  padding: 10px 100px;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  height: 100px !important;
+  min-height: 100px !important;
+  z-index: 10 !important;
+  position: fixed;
+  top: 0;
+}
+.textHeader {
+  padding: 24px;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 18px;
+}
+.btnHeader {
+  border-radius: 40px;
+  width: 108px;
+  height: 40px;
+  font-size: 16px;
+  margin-left: 10px;
+}
+.subMenu {
+  padding: 40px 0 60px 0;
+}
+.logoHeader {
+  width: 30%;
+}
 .footer {
   padding: 20px;
   background: $primary;
   color: $white;
   width: 100%;
-  bottom: 0;
   display: flex;
   justify-content: center;
+  margin: auto;
 }
 .copyRight {
   padding-right: 10px;

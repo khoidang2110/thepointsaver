@@ -48,28 +48,34 @@ export default function ProductDetail({ data }: any) {
         style={{ borderTop: data?.tag ? `4px solid red` : "none" }}
       >
         <div onClick={showView} className={styles.boxImg}>
-          <img src={data?.img}></img>
+          <img src={"/nodata.svg" || data?.deal_image} />
           <div className={styles.tagProd}>
             <span className={styles.greentag}>▲ 12%</span>
             {/* <span className={styles.redtag}>▼ 12%</span> */}
           </div>
         </div>
-        <span className={styles.blackFri}>🔥 Black Friday</span>
+        {/* <span className={styles.blackFri}>🔥 Black Friday</span> */}
         <span onClick={showView} className={styles.textProduct}>
-          {data?.name}
+          {data?.item_title}
         </span>
+        <span className={styles.price}>${data?.price}</span>
+        {data?.deal_store.length > 0 && (
+          <div className={styles.moreInfo}>
+            <Flex>
+              {data?.deal_store?.map((item: any, i: any) => (
+                <div key={i.toString()} className={styles.boxImg}>
+                  <img
+                    key={i.toString()}
+                    src={item?.stores?.store_icon}
+                    alt={item?.stores?.store_name}
+                  />
+                </div>
+              ))}
+            </Flex>
+            <span className={styles.time}>{data?.time}</span>
+          </div>
+        )}
 
-        <span className={styles.price}>{data?.price}</span>
-        <div className={styles.moreInfo}>
-          <Flex>
-            {data?.brand.map((item: any, i: any) => (
-              <div key={i.toString()} className={styles.boxImg}>
-                <img key={i.toString()} src={item?.img} alt={item?.name} />
-              </div>
-            ))}
-          </Flex>
-          <span className={styles.time}>{data?.time}</span>
-        </div>
         <div className={styles.button}>
           <ButtonCus
             onClick={showCommit}

@@ -1,8 +1,12 @@
 import http from "./http-common";
 
 export const getAllProduct = () => {
-  return http.get(`/product-upc`);
+  return http.get(`/item/get-all`);
+};
+
+export const getAllDeal = () => {
+  return http.get(`/deal/get-all`);
 };
 export const getInfoUser = () => {
-  return http.post(`/users/get-user-info`);
+  return http.get(`/user/get-info`);
 };
