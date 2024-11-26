@@ -6,6 +6,7 @@ import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   PieChartOutlined,
+  CloseOutlined,
 } from "@ant-design/icons";
 
 import { Button, Col, ConfigProvider, Drawer, Flex, Layout, Menu, Row } from "antd";
@@ -23,17 +24,10 @@ const { Header, Content, Sider } = Layout;
 const LayoutWrapper = ({ children }: { children: React.ReactNode }) => {
   const size = useWindowSize();
   const [open, setOpen] = useState(false);
+  const [openHeader, setOpenHeader] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-
-  const showDrawer = () => {
-    setOpen(true);
-  };
-
-  const onClose = () => {
-    setOpen(false);
-  };
-
   const [collapsed, setCollapsed] = useState(false);
+
   const pathname = usePathname();
 
   const items = [
@@ -57,6 +51,43 @@ const LayoutWrapper = ({ children }: { children: React.ReactNode }) => {
   // Check if current route is login or register to conditionally render Sider and Header
   const isAuthRoute = pathname === "/login" || pathname === "/register" || pathname === "/admin";
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 40) {
+        // Adjust the scroll threshold as needed
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const showDrawer = () => {
+    setOpen(true);
+  };
+
+  const onClose = () => {
+    setOpen(false);
+  };
+
+  const handleMenu = () => {
+    if (collapsed) {
+      setOpenHeader(false);
+    } else {
+      setOpenHeader(true);
+    }
+  };
+
+  const onCloseHeader = () => {
+    setOpenHeader(false);
+  };
+
   const renderMenu = () => {
     return (
       <Menu mode="inline" onClick={onClose}>
@@ -77,31 +108,6 @@ const LayoutWrapper = ({ children }: { children: React.ReactNode }) => {
         )}
       </Menu>
     );
-  };
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 40) {
-        // Adjust the scroll threshold as needed
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
-  const handleMenu = () => {
-    if (collapsed) {
-      setOpen(false);
-    } else {
-      setOpen(true);
-    }
   };
 
   return (
@@ -211,13 +217,51 @@ const LayoutWrapper = ({ children }: { children: React.ReactNode }) => {
                 </div>
               </>
             ) : (
-              <div onClick={handleMenu}>
-                <img src="./menu.svg" />
-              </div>
+              <>
+                <div onClick={handleMenu}>
+                  <img src="./menu.svg" />
+                </div>
+                <Drawer
+                  placement="right"
+                  size="default"
+                  closable={true}
+                  onClose={onCloseHeader}
+                  open={openHeader}
+                  key="right"
+                  width={"250px"}
+                  style={{ padding: 0! }}
+                  closeIcon={
+                    <CloseOutlined
+                      style={{
+                        position: "absolute",
+                        top: "20px", // Adjust the top position
+                        right: "20px", // Adjust the left position
+                        fontSize: "16px",
+                        color: "#000",
+                        cursor: "pointer",
+                      }}
+                    />
+                  }
+                >
+                  <div className={styles.drawerHeader}>
+                    <span className={styles.textHeader}>Home</span>
+                    <span className={styles.textHeader}>About</span>
+                    <span className={styles.textHeader}>FAQs</span>
+                    <span className={styles.textHeader}>Contact Us</span>
+                    <div className={styles.drawerFooter}>
+                      <Button className={styles.btnHeader} variant="outlined">
+                        Login
+                      </Button>
+                      <Button type="primary" className={styles.btnHeader}>
+                        Join Now
+                      </Button>
+                    </div>
+                  </div>
+                </Drawer>
+              </>
             )}
           </Flex>
           {children}
-
           <Row align="middle" className={styles.subMenu}>
             <Col xs={24} sm={24} md={24} lg={8} xl={8}>
               <div className={styles.logoFooter}>
@@ -255,7 +299,6 @@ const LayoutWrapper = ({ children }: { children: React.ReactNode }) => {
               </Flex>
             </Col>
           </Row>
-
           <Row>
             <Flex className={styles.footer}>
               <div className={styles.copyRight}>
