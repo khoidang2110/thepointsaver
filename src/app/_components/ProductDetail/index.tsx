@@ -59,7 +59,7 @@ export default function ProductDetail({ data }: any) {
           {data?.item_title}
         </span>
         <span className={styles.price}>${data?.price}</span>
-        {data?.deal_store.length > 0 && (
+        {data?.deal_store?.length > 0 && (
           <div className={styles.moreInfo}>
             <Flex>
               {data?.deal_store?.map((item: any, i: any) => (
