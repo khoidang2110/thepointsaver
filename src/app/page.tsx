@@ -17,13 +17,6 @@ const Home = () => {
   const size = useWindowSize();
   const [sizeWidth, setSizeWidth] = useState<any>();
 
-  // useEffect(() => {
-  //   (async () => {
-  //     const res = await getAllProduct();
-  //     console.log("res", res);
-  //   })();
-  // }, []);
-
   const dataNoti = [
     {
       name: "BG Deals Commitment Update",

@@ -3,8 +3,6 @@ import {
   DollarOutlined,
   DropboxOutlined,
   LinkOutlined,
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
   PieChartOutlined,
   CloseOutlined,
 } from "@ant-design/icons";
@@ -23,12 +21,13 @@ const { Header, Content, Sider } = Layout;
 
 const LayoutWrapper = ({ children }: { children: React.ReactNode }) => {
   const size = useWindowSize();
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
+
   const [openHeader, setOpenHeader] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
-
-  const pathname = usePathname();
+  const [selectedKey, setSelectedKey] = useState("3");
 
   const items = [
     { key: "1", icon: <PieChartOutlined />, label: "Dashboard", name: "/" },
@@ -52,6 +51,9 @@ const LayoutWrapper = ({ children }: { children: React.ReactNode }) => {
   const isAuthRoute = pathname === "/login" || pathname === "/register" || pathname === "/admin";
 
   useEffect(() => {
+    const filter: any = items.find((e) => e.name == pathname.slice(1));
+
+    setSelectedKey(filter?.key);
     const handleScroll = () => {
       if (window.scrollY > 40) {
         // Adjust the scroll threshold as needed
@@ -76,6 +78,10 @@ const LayoutWrapper = ({ children }: { children: React.ReactNode }) => {
     setOpen(false);
   };
 
+  const handleMenuClick = ({ key }: any) => {
+    setSelectedKey(key);
+  };
+
   const handleMenu = () => {
     if (collapsed) {
       setOpenHeader(false);
@@ -90,7 +96,7 @@ const LayoutWrapper = ({ children }: { children: React.ReactNode }) => {
 
   const renderMenu = () => {
     return (
-      <Menu mode="inline" onClick={onClose}>
+      <Menu selectedKeys={[selectedKey]} mode="inline" onClick={handleMenuClick}>
         {items.map((item: any) =>
           item?.children ? (
             <Menu.SubMenu key={item.key} icon={item.icon} title={item.label}>

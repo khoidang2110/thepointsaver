@@ -58,7 +58,7 @@ export default function ProductDetail({ data }: any) {
         <span onClick={showView} className={styles.textProduct}>
           {data?.item_title}
         </span>
-        <span className={styles.price}>${data?.price}</span>
+        <span className={styles.price}>{data?.price}</span>
         {data?.deal_store?.length > 0 && (
           <div className={styles.moreInfo}>
             <Flex>

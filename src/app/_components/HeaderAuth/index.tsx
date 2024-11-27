@@ -62,7 +62,7 @@ export default function HeaderAuth({ showDrawer, collapsed, setCollapsed }: any)
       <span
         onClick={() => setOpen(true)}
         className="flex"
-        style={{ fontWeight: "600", fontSize: "12px" }}
+        style={{ fontWeight: "600", fontSize: "12px", cursor: "pointer" }}
       >
         <p>{data?.user_name}</p>
       </span>

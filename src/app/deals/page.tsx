@@ -1,18 +1,26 @@
 "use client";
-import { Col, Row, Tabs } from "antd";
+import { Col, Pagination, Row, Tabs } from "antd";
 import FilterOptions from "../_components/FilterOptions";
 import ProductDetail from "../_components/ProductDetail";
 import { useEffect, useState } from "react";
 import { getAllDeal } from "../_api/AuthService";
 const Deals = () => {
   const [dataDeals, setDataDeals] = useState<any>();
+  const [total, setTotal] = useState(100); // Total number of items
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
   useEffect(() => {
     (async () => {
-      const res = await getAllDeal();
+      const payload = { page: currentPage, size: pageSize };
+      const res = await getAllDeal(payload);
       setDataDeals(res?.data);
     })();
-  }, []);
-  console.log("dataDeals", dataDeals);
+  }, [currentPage, pageSize]);
+
+  const handlePageChange = (page: number, size: number) => {
+    setCurrentPage(page);
+    setPageSize(size);
+  };
   const dataProd = [
     {
       img: "https://i5.walmartimages.com/asr/fff458b8-4eff-491d-af67-34968fe58531.57b1a2f9f198a430353cf8bde1c1ed80.jpeg?odnHeight=450&odnWidth=450&odnBg=ffffff",
@@ -183,6 +191,14 @@ const Deals = () => {
                 </Col>
               ))}
             </Row>
+            <Pagination
+              current={currentPage}
+              pageSize={pageSize}
+              total={total}
+              onChange={handlePageChange}
+              showSizeChanger
+              pageSizeOptions={["5", "10", "20", "50"]}
+            />
           </TabPane>
         ))}
       </Tabs>
