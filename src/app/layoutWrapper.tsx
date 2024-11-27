@@ -16,6 +16,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useWindowSize } from "./_utils";
 import styles from "./styles.module.scss";
 import HeaderAuth from "./_components/HeaderAuth";
+import { useRouter } from "next/navigation";
 
 const { Header, Content, Sider } = Layout;
 
@@ -23,11 +24,10 @@ const LayoutWrapper = ({ children }: { children: React.ReactNode }) => {
   const size = useWindowSize();
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-
   const [openHeader, setOpenHeader] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
-  const [selectedKey, setSelectedKey] = useState("3");
+  const [selectedKey, setSelectedKey] = useState("1");
 
   const items = [
     { key: "1", icon: <PieChartOutlined />, label: "Dashboard", name: "/" },
@@ -49,11 +49,26 @@ const LayoutWrapper = ({ children }: { children: React.ReactNode }) => {
 
   // Check if current route is login or register to conditionally render Sider and Header
   const isAuthRoute = pathname === "/login" || pathname === "/register" || pathname === "/admin";
+  const findItemByName: any = (items: any, name: any) => {
+    for (const item of items) {
+      if (item.name === name) return item;
+      if (item.children) {
+        const [parentName, ...rest] = name.split("/");
+        if (item.name === parentName) {
+          return findItemByName(item.children, rest.join("/")); // Recurse with the remaining path
+        }
+      }
+    }
+    return null;
+  };
+  useEffect(() => {
+    const matchedItem = findItemByName(items, pathname.slice(1)); // Remove leading "/" for matching
+    if (matchedItem) {
+      setSelectedKey(matchedItem?.key);
+    }
+  }, [pathname]);
 
   useEffect(() => {
-    const filter: any = items.find((e) => e.name == pathname.slice(1));
-
-    setSelectedKey(filter?.key);
     const handleScroll = () => {
       if (window.scrollY > 40) {
         // Adjust the scroll threshold as needed
