@@ -3,10 +3,9 @@ import { Col, Tabs, Flex, Input, Row, Select, Slider } from "antd";
 import styles from "./styles.module.scss";
 import "./styles.scss";
 
-export default function FilterOptions() {
+export default function FilterOptions({ onSearch }: any) {
   const { Search } = Input;
 
-  const onSearch = (value: any) => {};
   const onChange = () => {};
   const formatter = (value: any) => `${value * 100}`;
   const marks = {
@@ -28,18 +27,10 @@ export default function FilterOptions() {
               width: "fit-content",
             }}
           >
-            <Select.Option value="descPrice">
-              Highest to Lowest Price
-            </Select.Option>
-            <Select.Option value="ascPrice">
-              Lowest to Highest Price
-            </Select.Option>
-            <Select.Option value="descComm">
-              Highest to Lowest Comm.
-            </Select.Option>
-            <Select.Option value="ascComm">
-              Lowest to Highest Comm.
-            </Select.Option>
+            <Select.Option value="descPrice">Highest to Lowest Price</Select.Option>
+            <Select.Option value="ascPrice">Lowest to Highest Price</Select.Option>
+            <Select.Option value="descComm">Highest to Lowest Comm.</Select.Option>
+            <Select.Option value="ascComm">Lowest to Highest Comm.</Select.Option>
           </Select>
         </Flex>
       </Col>
