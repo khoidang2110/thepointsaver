@@ -3,10 +3,10 @@
 import { GET_DEAL_FAILURE, GET_DEAL_REQUEST, GET_DEAL_SUCCESS } from "./actionTypes";
 import { USERState } from "./types";
 
-const initialState: USERState = {
+const initialState: any = {
   status: "",
-  dataUser: [],
-  dataRef: null,
+  dataUser: {},
+  dataRef: {},
   dataInfoCard: null,
   error: null,
 };
@@ -23,7 +23,8 @@ export default (state = initialState, action: any) => {
       return {
         ...state,
         status: "done",
-        dataUser: action.payload,
+        dataRef: { ...state.dataUser },
+        dataUser: { ...state.dataRef, ...action.payload.payload },
       };
     case GET_DEAL_FAILURE:
       return {

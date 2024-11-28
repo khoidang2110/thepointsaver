@@ -4,28 +4,40 @@ import FilterOptions from "../_components/FilterOptions";
 import ProductDetail from "../_components/ProductDetail";
 import { useEffect, useState } from "react";
 import { getAllDeal } from "../_api/AuthService";
+import { useDispatch, useSelector } from "react-redux";
+import { getDealRequest } from "../store/user/actions";
 const Deals = () => {
-  const [dataDeals, setDataDeals] = useState<any>();
+  const [dataDeals, setDataDeals] = useState<any>({});
   const [total, setTotal] = useState(100); // Total number of items
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
-  const [dataPayload, setDataPayload] = useState("");
+  const [data, setData] = useState();
+
   useEffect(() => {
     (async () => {
-      const payload = { page: currentPage, size: pageSize };
-      const res = await getAllDeal(payload);
-      console.log("res", res);
+      console.log("data", data);
+      const res = await getAllDeal(data);
       setDataDeals(res?.data);
     })();
-  }, [currentPage, pageSize]);
+  }, [data]);
+
+  const payloadData = (value: any) => {
+    setData((prevDataUser: any) => {
+      return {
+        ...prevDataUser, // Spread the previous dataUser values
+        ...value, // Merge in the new data
+      };
+    });
+  };
 
   const handlePageChange = (page: number, size: number) => {
     setCurrentPage(page);
     setPageSize(size);
+    payloadData({ page: page, size: size });
   };
+
   const onSearch = (value: any) => {
-    const payload = { page: currentPage, size: pageSize, key: value };
-    console.log("payloadxx", payload);
+    payloadData({ key: value });
   };
 
   // const dataProd = [
@@ -73,12 +85,12 @@ const Deals = () => {
           <TabPane tab={e.name} key={e.name}>
             <FilterOptions onSearch={onSearch} />
             <Row gutter={[16, 16]}>
-              {dataDeals &&
+              {/* {dataDeals &&
                 dataDeals?.map((item: any, i: any) => (
                   <Col key={i.toString()} xs={24} sm={24} md={12} lg={8} xl={6}>
                     <ProductDetail data={item} />
                   </Col>
-                ))}
+                ))} */}
             </Row>
             <Pagination
               current={currentPage}

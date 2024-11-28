@@ -9,6 +9,7 @@ import { getDealFailure, getDealSuccess } from "./actions";
 
 function* payloadGetDeal(payload: any): any {
   try {
+    console.log("payloadxx", payload);
     yield put(getDealSuccess(payload));
   } catch (e: any) {
     yield put(
