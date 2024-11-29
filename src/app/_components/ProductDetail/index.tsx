@@ -48,17 +48,24 @@ export default function ProductDetail({ data }: any) {
         style={{ borderTop: data?.tag ? `4px solid red` : "none" }}
       >
         <div onClick={showView} className={styles.boxImg}>
-          <img src={"/nodata.svg" || data?.deal_image} />
+          <img src={data?.item?.item_image || "/nodata.svg"} />
           <div className={styles.tagProd}>
-            <span className={styles.greentag}>▲ 12%</span>
-            {/* <span className={styles.redtag}>▼ 12%</span> */}
+            {data?.rate < 0 ? (
+              <span className={styles.redtag}>▼ {data?.rate?.toFixed(2)}%</span>
+            ) : (
+              <span className={styles.greentag}>▲ {data?.rate?.toFixed(2)}%</span>
+            )}
           </div>
         </div>
         {/* <span className={styles.blackFri}>🔥 Black Friday</span> */}
         <span onClick={showView} className={styles.textProduct}>
           {data?.item_title}
         </span>
-        <span className={styles.price}>{data?.price}</span>
+        <Flex align="flex-end" justify="center">
+          <span className={styles.price}>{data?.price}</span>
+          <span className={styles.oldprice}>{data?.old_price}</span>
+        </Flex>
+
         {data?.deal_store?.length > 0 && (
           <div className={styles.moreInfo}>
             <Flex>

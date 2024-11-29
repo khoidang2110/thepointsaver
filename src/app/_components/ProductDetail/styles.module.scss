@@ -71,7 +71,13 @@ $gray1: rgb(175, 175, 175);
   font-size: 20px;
   display: block;
   text-align: center;
-  margin-bottom: 10px;
+  margin-right: 10px;
+}
+.oldprice {
+  color: $gray1;
+  font-size: 16px;
+  display: block;
+  text-decoration: line-through !important;
 }
 .moreInfo {
   display: flex;

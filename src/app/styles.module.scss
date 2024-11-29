@@ -153,6 +153,11 @@ $red2: #ffe5e6;
       font-size: 18px;
       margin-right: 10px;
     }
+    .oldprice {
+      color: $gray;
+      font-size: 18px;
+      text-decoration: line-through !important;
+    }
 
     .moreInfo {
       background-color: $gray;

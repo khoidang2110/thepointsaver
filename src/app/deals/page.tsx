@@ -4,23 +4,21 @@ import FilterOptions from "../_components/FilterOptions";
 import ProductDetail from "../_components/ProductDetail";
 import { useEffect, useState } from "react";
 import { getAllDeal } from "../_api/AuthService";
-import { useDispatch, useSelector } from "react-redux";
-import { getDealRequest } from "../store/user/actions";
+
 const Deals = () => {
   const [dataDeals, setDataDeals] = useState<any>({});
   const [total, setTotal] = useState(100); // Total number of items
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(10);
-  const [data, setData] = useState();
+  const [pageSize, setPageSize] = useState(5);
+  const [data, setData] = useState<any>({ page: 1, size: 5, data_type: "onSale" });
 
   useEffect(() => {
     (async () => {
-      console.log("data", data);
       const res = await getAllDeal(data);
       setDataDeals(res?.data);
     })();
   }, [data]);
-
+  console.log("dataDeals", dataDeals);
   const payloadData = (value: any) => {
     setData((prevDataUser: any) => {
       return {
@@ -37,31 +35,11 @@ const Deals = () => {
   };
 
   const onSearch = (value: any) => {
-    payloadData({ key: value });
+    payloadData({ optional: value });
   };
   const onChange = (key: any, value: any) => {
     payloadData({ [key]: value });
   };
-
-  // const dataProd = [
-  //   {
-  //     img: "https://i5.walmartimages.com/asr/fff458b8-4eff-491d-af67-34968fe58531.57b1a2f9f198a430353cf8bde1c1ed80.jpeg?odnHeight=450&odnWidth=450&odnBg=ffffff",
-  //     name: "Dualsense Wireless Controller For Playstation 5 - Fortnite Limited Edition",
-  //     price: "$19.00",
-  //     tag: "Below",
-  //     time: "ED 11-23-2024",
-  //     brand: [
-  //       {
-  //         name: "Amazon",
-  //         img: "https://logo.clearbit.com/amazon.com",
-  //       },
-  //       {
-  //         name: "Amazon",
-  //         img: "https://logo.clearbit.com/amazon.com",
-  //       },
-  //     ],
-  //   },
-  // ];
 
   const { TabPane } = Tabs;
   // Handle tab change
@@ -71,16 +49,16 @@ const Deals = () => {
   const dataTab = [
     {
       name: "On Sale Now",
-      key: "onSale",
+      key: "on_sale_now",
     },
     {
       name: "Below Cost",
-      key: "belowCost",
+      key: "below_cost",
     },
-    {
-      name: "In Store",
-      key: "inStore",
-    },
+    // {
+    //   name: "In Store",
+    //   key: "inStore",
+    // },
     {
       name: "All Active",
       key: "active",
@@ -90,21 +68,23 @@ const Deals = () => {
   return (
     <>
       <Tabs defaultActiveKey={dataTab[0].name} onChange={handleTabChange}>
-        {dataTab?.map((e, index) => (
+        {dataTab?.map((e: any) => (
           <TabPane tab={e.name} key={e.key}>
             <FilterOptions onSearch={onSearch} onChange={onChange} />
             <Row gutter={[16, 16]}>
-              {/* {dataDeals &&
-                dataDeals?.map((item: any, i: any) => (
+              {dataDeals?.deals?.length > 0 &&
+                dataDeals.deals?.map((item: any, i: any) => (
                   <Col key={i.toString()} xs={24} sm={24} md={12} lg={8} xl={6}>
                     <ProductDetail data={item} />
                   </Col>
-                ))} */}
+                ))}
             </Row>
+
             <Pagination
+              align="end"
               current={currentPage}
               pageSize={pageSize}
-              total={total}
+              total={dataDeals?.total}
               onChange={handlePageChange}
               showSizeChanger
               pageSizeOptions={["5", "10", "20", "50"]}
