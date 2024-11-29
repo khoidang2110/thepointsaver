@@ -33,7 +33,7 @@ const Login = () => {
   const [form] = Form.useForm();
   return (
     <>
-      <Row className={styles.loginForm}>
+      <Row className={styles.loginForm} align="middle" justify="space-between">
         <Col xs={24} sm={24} md={24} lg={7} xl={7} xxl={7}>
           <div>
             <span className={styles.textLogin}>Log In</span>
@@ -50,14 +50,14 @@ const Login = () => {
               name="email"
               rules={[{ required: true, message: "Please input your username!" }]}
             >
-              <Input placeholder="email" />
+              <Input size="large" />
             </Form.Item>
             <Form.Item
               label="Password"
               name="password"
               rules={[{ required: true, message: "Please input your password!" }]}
             >
-              <Input.Password placeholder="password" />
+              <Input.Password size="large" />
             </Form.Item>
             <div>
               <span className={styles.forgot}>forgot your password?</span>

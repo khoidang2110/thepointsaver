@@ -51,9 +51,9 @@ export default function ProductDetail({ data }: any) {
           <img src={data?.item?.item_image || "/nodata.svg"} />
           <div className={styles.tagProd}>
             {data?.rate < 0 ? (
-              <span className={styles.redtag}>▼ {data?.rate?.toFixed(2)}%</span>
+              <span className={styles.redtag}>▼ ${data?.rate?.toFixed(2)}</span>
             ) : (
-              <span className={styles.greentag}>▲ {data?.rate?.toFixed(2)}%</span>
+              <span className={styles.greentag}>▲ ${data?.rate?.toFixed(2)}</span>
             )}
           </div>
         </div>
@@ -62,8 +62,8 @@ export default function ProductDetail({ data }: any) {
           {data?.item_title}
         </span>
         <Flex align="flex-end" justify="center">
-          <span className={styles.price}>{data?.price}</span>
-          <span className={styles.oldprice}>{data?.old_price}</span>
+          <span className={styles.price}>{data?.total}</span>
+          {/* <span className={styles.oldprice}>{data?.old_price}</span> */}
         </Flex>
 
         {data?.deal_store?.length > 0 && (

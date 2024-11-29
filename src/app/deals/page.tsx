@@ -7,7 +7,6 @@ import { getAllDeal } from "../_api/AuthService";
 
 const Deals = () => {
   const [dataDeals, setDataDeals] = useState<any>({});
-  const [total, setTotal] = useState(100); // Total number of items
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(5);
   const [data, setData] = useState<any>({ page: 1, size: 5, data_type: "onSale" });
@@ -84,7 +83,7 @@ const Deals = () => {
               align="end"
               current={currentPage}
               pageSize={pageSize}
-              total={dataDeals?.total}
+              total={dataDeals?.total_count}
               onChange={handlePageChange}
               showSizeChanger
               pageSizeOptions={["5", "10", "20", "50"]}
