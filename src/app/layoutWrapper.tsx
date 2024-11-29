@@ -270,11 +270,15 @@ const LayoutWrapper = ({ children }: { children: React.ReactNode }) => {
                     <span className={styles.textHeader}>FAQs</span>
                     <span className={styles.textHeader}>Contact Us</span>
                     <div className={styles.drawerFooter}>
-                      <Button className={styles.btnHeader} variant="outlined">
-                        Login
+                      <Button
+                        onClick={onCloseHeader}
+                        className={styles.btnHeader}
+                        variant="outlined"
+                      >
+                        <Link href="/login">Login</Link>
                       </Button>
-                      <Button type="primary" className={styles.btnHeader}>
-                        Join Now
+                      <Button onClick={onCloseHeader} type="primary" className={styles.btnHeader}>
+                        <Link href="/register">Join Now</Link>
                       </Button>
                     </div>
                   </div>
