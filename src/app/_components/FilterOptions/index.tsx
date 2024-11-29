@@ -3,10 +3,8 @@ import { Col, Tabs, Flex, Input, Row, Select, Slider } from "antd";
 import styles from "./styles.module.scss";
 import "./styles.scss";
 
-export default function FilterOptions({ onSearch }: any) {
+export default function FilterOptions({ onSearch, onChange }: any) {
   const { Search } = Input;
-
-  const onChange = () => {};
   const formatter = (value: any) => `${value * 100}`;
   const marks = {
     0: "$0",
@@ -23,6 +21,7 @@ export default function FilterOptions({ onSearch }: any) {
             <img src="https://buyinggroup.com/static/media/sorting-icon.f73dcc85.svg" />
           </div>
           <Select
+            onChange={(value) => onChange("price", value)}
             dropdownStyle={{
               width: "fit-content",
             }}
@@ -36,6 +35,7 @@ export default function FilterOptions({ onSearch }: any) {
       </Col>
       <Col xs={14} md={6} lg={4}>
         <Select
+          onChange={(value) => onChange("store", value)}
           style={{ width: "100%" }}
           showSearch
           placeholder="Stores"
@@ -54,7 +54,10 @@ export default function FilterOptions({ onSearch }: any) {
           <div>
             <span className={styles.text}>Locked:</span>
           </div>
-          <Select dropdownStyle={{ width: "fit-content" }} onChange={onChange}>
+          <Select
+            dropdownStyle={{ width: "fit-content" }}
+            onChange={(value) => onChange("locked", value)}
+          >
             <Select.Option value="all">All</Select.Option>
             <Select.Option value="yes">Yes</Select.Option>
             <Select.Option value="no">No</Select.Option>
@@ -66,7 +69,10 @@ export default function FilterOptions({ onSearch }: any) {
           <div>
             <span className={styles.text}>is Full:</span>
           </div>
-          <Select dropdownStyle={{ width: "fit-content" }} onChange={onChange}>
+          <Select
+            dropdownStyle={{ width: "fit-content" }}
+            onChange={(value) => onChange("isFull", value)}
+          >
             <Select.Option value="all">All</Select.Option>
             <Select.Option value="yes">Yes</Select.Option>
             <Select.Option value="no">No</Select.Option>
@@ -75,13 +81,13 @@ export default function FilterOptions({ onSearch }: any) {
       </Col>
       <Col xs={12} lg={4}>
         <Slider
+          onChangeComplete={(value) => onChange("slider", value * 100)}
           marks={marks}
           tooltip={{
             formatter,
           }}
         />
       </Col>
-      <Col xs={3} lg={1}></Col>
     </Row>
   );
 }

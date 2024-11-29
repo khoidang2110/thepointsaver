@@ -39,6 +39,9 @@ const Deals = () => {
   const onSearch = (value: any) => {
     payloadData({ key: value });
   };
+  const onChange = (key: any, value: any) => {
+    payloadData({ [key]: value });
+  };
 
   // const dataProd = [
   //   {
@@ -62,19 +65,25 @@ const Deals = () => {
 
   const { TabPane } = Tabs;
   // Handle tab change
-  const handleTabChange = (key: any) => {};
+  const handleTabChange = (key: any) => {
+    payloadData({ data_type: key });
+  };
   const dataTab = [
     {
       name: "On Sale Now",
+      key: "onSale",
     },
     {
       name: "Below Cost",
+      key: "belowCost",
     },
     {
       name: "In Store",
+      key: "inStore",
     },
     {
       name: "All Active",
+      key: "active",
     },
   ];
 
@@ -82,8 +91,8 @@ const Deals = () => {
     <>
       <Tabs defaultActiveKey={dataTab[0].name} onChange={handleTabChange}>
         {dataTab?.map((e, index) => (
-          <TabPane tab={e.name} key={e.name}>
-            <FilterOptions onSearch={onSearch} />
+          <TabPane tab={e.name} key={e.key}>
+            <FilterOptions onSearch={onSearch} onChange={onChange} />
             <Row gutter={[16, 16]}>
               {/* {dataDeals &&
                 dataDeals?.map((item: any, i: any) => (
