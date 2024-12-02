@@ -5,7 +5,7 @@ export const getAllProduct = () => {
 };
 
 export const getAllDeal = (payload: any) => {
-  return http.post(`/deal/get-deal`, payload);
+  return http.post(`/deal/get-deals`, payload);
 };
 
 export const getInfoUser = () => {
