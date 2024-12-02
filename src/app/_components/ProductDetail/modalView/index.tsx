@@ -13,7 +13,7 @@ export default function ModalView({ onClose, onClick, openView, dealId }: any) {
       padding: 20px 12px; /* Adjust the padding as needed */
     }
   `;
-
+  //adad
   useEffect(() => {
     if (openView) {
       (async () => {
