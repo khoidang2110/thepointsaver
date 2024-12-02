@@ -1,11 +1,11 @@
 "use client";
 import "./globals.css";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
-import LayoutWrapper from "./layoutAuth";
+import LayoutUnAuth from "./layoutUnAuth";
 import { Provider } from "react-redux";
 import store from "./store/store";
 import { usePathname } from "next/navigation";
-import LayoutAuth from "./layoutUnAuth";
+import LayoutAuth from "./layoutAuth";
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
@@ -16,9 +16,9 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         <AntdRegistry>
           <Provider store={store}>
             {isAuthRoute ? (
-              <LayoutAuth>{children}</LayoutAuth>
+              <LayoutUnAuth>{children}</LayoutUnAuth>
             ) : (
-              <LayoutWrapper>{children}</LayoutWrapper>
+              <LayoutAuth>{children}</LayoutAuth>
             )}
           </Provider>
         </AntdRegistry>

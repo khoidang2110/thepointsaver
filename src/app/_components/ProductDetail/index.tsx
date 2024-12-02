@@ -11,25 +11,18 @@ import ModalView from "./modalView";
 export default function ProductDetail({ data }: any) {
   const [openView, setOpenView] = useState<boolean>(false);
   const [openCommit, setOpenCommit] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(true);
 
   const showView = () => {
     setOpenView(true);
-    // setLoading(true);
-
-    // // Simple loading mock. You should add cleanup logic in real world.
-    // setTimeout(() => {
-    //   setLoading(false);
-    // }, 2000);
+  };
+  const onCloseView = () => {
+    setOpenView(false);
   };
   const showCommit = () => {
     setOpenCommit(true);
   };
-  const onClose = () => {
+  const onCloseCommit = () => {
     setOpenCommit(false);
-  };
-  const onCloseView = () => {
-    setOpenView(false);
   };
 
   return (
@@ -100,8 +93,8 @@ export default function ProductDetail({ data }: any) {
           />
         </div>
       </div>
-      <ModalView onClose={onCloseView} openView={openView} />
-      <ModalCommit onClose={onClose} openCommit={openCommit} />
+      <ModalView onClose={onCloseView} openView={openView} dealId={data?.deal_id} />
+      <ModalCommit onClose={onCloseCommit} openCommit={openCommit} />
     </Col>
   );
 }

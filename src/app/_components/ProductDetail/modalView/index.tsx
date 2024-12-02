@@ -4,13 +4,25 @@ import { ButtonCus } from "../../ButtonCus";
 import styles from "../styles.module.scss";
 import styled from "styled-components";
 import type { ProgressProps } from "antd";
+import { useEffect } from "react";
+import { getDetailDeal } from "@/app/_api/AuthService";
 
-export default function ModalView({ onClose, onClick, openView }: any) {
+export default function ModalView({ onClose, onClick, openView, dealId }: any) {
   const StyledModal = styled(Modal)`
     .ant-modal-content {
       padding: 20px 12px; /* Adjust the padding as needed */
     }
   `;
+
+  useEffect(() => {
+    if (openView) {
+      (async () => {
+        const res = getDetailDeal(dealId);
+        console.log("res", res);
+      })();
+    }
+  }, [openView]);
+
   return (
     <StyledModal
       footer={
@@ -42,9 +54,7 @@ export default function ModalView({ onClose, onClick, openView }: any) {
             </span>
             <Flex className={styles.info}>
               <span className={`${styles.price} ${styles.mr5}`}>$103</span>
-              <span className={`${styles.blackFri} ${styles.mr5}`}>
-                🔥 Black Friday
-              </span>
+              <span className={`${styles.blackFri} ${styles.mr5}`}>🔥 Black Friday</span>
 
               <span className={`${styles.greentag} ${styles.mr5}`}>▲ 12%</span>
               {/* <span className={styles.redtag}>▼ 12%</span> */}
@@ -53,9 +63,7 @@ export default function ModalView({ onClose, onClick, openView }: any) {
               <Col xs={14} lg={12}>
                 <Row>
                   <Col xs={10} lg={10}>
-                    <span className={`${styles.subText} ${styles.regular16}`}>
-                      UPC
-                    </span>
+                    <span className={`${styles.subText} ${styles.regular16}`}>UPC</span>
                   </Col>
                   <Col xs={14} lg={14}>
                     <span className={styles.regular16}>194252818381</span>
@@ -65,9 +73,7 @@ export default function ModalView({ onClose, onClick, openView }: any) {
               <Col xs={10} lg={12}>
                 <Row>
                   <Col xs={10} lg={10}>
-                    <span className={`${styles.subText} ${styles.regular16}`}>
-                      Price
-                    </span>
+                    <span className={`${styles.subText} ${styles.regular16}`}>Price</span>
                   </Col>
                   <Col xs={14} lg={14}>
                     <span className={styles.regular16}>$99</span>
@@ -77,9 +83,7 @@ export default function ModalView({ onClose, onClick, openView }: any) {
               <Col xs={14} lg={12}>
                 <Row>
                   <Col xs={10} lg={10}>
-                    <span className={`${styles.subText} ${styles.regular16}`}>
-                      Model
-                    </span>
+                    <span className={`${styles.subText} ${styles.regular16}`}>Model</span>
                   </Col>
                   <Col xs={14} lg={14}>
                     <span className={styles.regular16}>MME73AM/A</span>
@@ -90,9 +94,7 @@ export default function ModalView({ onClose, onClick, openView }: any) {
               <Col xs={10} lg={12}>
                 <Row>
                   <Col xs={10} lg={10}>
-                    <span className={`${styles.subText} ${styles.regular16}`}>
-                      Comm.
-                    </span>
+                    <span className={`${styles.subText} ${styles.regular16}`}>Comm.</span>
                   </Col>
                   <Col xs={14} lg={14}>
                     <span className={styles.regular16}>$3.01</span>
@@ -107,9 +109,7 @@ export default function ModalView({ onClose, onClick, openView }: any) {
           </Col>
           <Col xs={24} lg={9}>
             <div className={styles.delivery}>
-              <span className={styles.title}>
-                Delivery & Shipping locations
-              </span>
+              <span className={styles.title}>Delivery & Shipping locations</span>
               <div>
                 <div className={styles.options}>
                   <span className={styles.maintext}>Delivery Options:</span>
@@ -144,27 +144,17 @@ export default function ModalView({ onClose, onClick, openView }: any) {
                         <Col xs={14} lg={12}>
                           <Row>
                             <Col xs={7} lg={7}>
-                              <span
-                                className={`${styles.subText} ${styles.regular16}`}
-                              >
-                                UPC
-                              </span>
+                              <span className={`${styles.subText} ${styles.regular16}`}>UPC</span>
                             </Col>
                             <Col xs={17} lg={17}>
-                              <span className={styles.regular16}>
-                                194252818381
-                              </span>
+                              <span className={styles.regular16}>194252818381</span>
                             </Col>
                           </Row>
                         </Col>
                         <Col xs={10} lg={12}>
                           <Row>
                             <Col xs={12} lg={8}>
-                              <span
-                                className={`${styles.subText} ${styles.regular16}`}
-                              >
-                                Price
-                              </span>
+                              <span className={`${styles.subText} ${styles.regular16}`}>Price</span>
                             </Col>
                             <Col xs={12} lg={16}>
                               <span className={styles.regular16}>$99</span>
@@ -174,27 +164,17 @@ export default function ModalView({ onClose, onClick, openView }: any) {
                         <Col xs={14} lg={12}>
                           <Row>
                             <Col xs={7} lg={7}>
-                              <span
-                                className={`${styles.subText} ${styles.regular16}`}
-                              >
-                                Model
-                              </span>
+                              <span className={`${styles.subText} ${styles.regular16}`}>Model</span>
                             </Col>
                             <Col xs={17} lg={17}>
-                              <span className={styles.regular16}>
-                                MME73AM/A
-                              </span>
+                              <span className={styles.regular16}>MME73AM/A</span>
                             </Col>
                           </Row>
                         </Col>
                         <Col xs={10} lg={12}>
                           <Row>
                             <Col xs={12} lg={8}>
-                              <span
-                                className={`${styles.subText} ${styles.regular16}`}
-                              >
-                                Comm.
-                              </span>
+                              <span className={`${styles.subText} ${styles.regular16}`}>Comm.</span>
                             </Col>
                             <Col xs={12} lg={16}>
                               <span className={styles.regular16}>$3.01</span>

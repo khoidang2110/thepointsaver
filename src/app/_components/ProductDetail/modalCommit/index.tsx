@@ -4,6 +4,8 @@ import { ButtonCus } from "../../ButtonCus";
 import styles from "../styles.module.scss";
 import styled from "styled-components";
 import type { ProgressProps } from "antd";
+import { useEffect } from "react";
+import { getDetailDeal } from "@/app/_api/AuthService";
 
 export default function ModalCommit({ onClose, openCommit }: any) {
   const StyledModalCommit = styled(Modal)`
@@ -61,9 +63,7 @@ export default function ModalCommit({ onClose, openCommit }: any) {
             </Row>
             <Row className="mb-1">
               <Col xs={5} lg={4}>
-                <span className={`${styles.subText} ${styles.regular16}`}>
-                  UPC
-                </span>
+                <span className={`${styles.subText} ${styles.regular16}`}>UPC</span>
               </Col>
               <Col xs={19} lg={20}>
                 <span className={styles.regular16}>194252818381</span>
@@ -73,9 +73,7 @@ export default function ModalCommit({ onClose, openCommit }: any) {
               <Col xs={12} lg={12}>
                 <Row>
                   <Col xs={10} lg={8}>
-                    <span className={`${styles.subText} ${styles.regular16}`}>
-                      Price
-                    </span>
+                    <span className={`${styles.subText} ${styles.regular16}`}>Price</span>
                   </Col>
                   <Col xs={14} lg={16}>
                     <span className={styles.regular16}>$99</span>
@@ -85,9 +83,7 @@ export default function ModalCommit({ onClose, openCommit }: any) {
               <Col xs={12} lg={12}>
                 <Row>
                   <Col xs={10} lg={10}>
-                    <span className={`${styles.subText} ${styles.regular16}`}>
-                      Comm.
-                    </span>
+                    <span className={`${styles.subText} ${styles.regular16}`}>Comm.</span>
                   </Col>
                   <Col xs={14} lg={14}>
                     <span className={styles.regular16}>$3.01</span>
@@ -98,9 +94,7 @@ export default function ModalCommit({ onClose, openCommit }: any) {
           </Col>
           <Col xs={24} md={24} lg={8} xl={8}>
             <InputNumber placeholder="Enter amount" style={{ width: "100%" }} />
-            <span className={styles.allowText}>
-              Max Allowed Limit: Unlimited
-            </span>
+            <span className={styles.allowText}>Max Allowed Limit: Unlimited</span>
             <Progress percent={50} strokeColor={twoColors} />
           </Col>
         </Row>
