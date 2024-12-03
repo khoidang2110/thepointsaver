@@ -10,7 +10,9 @@ const Loading = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        height: "100vh",
+        height: "100%",
+        width: "100%",
+        zIndex: 10,
         backgroundColor: "#f0f2f5", // Optional: a light background for better visibility
       }}
     >

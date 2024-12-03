@@ -4,20 +4,26 @@ import FilterOptions from "../_components/FilterOptions";
 import ProductDetail from "../_components/ProductDetail";
 import { useEffect, useState } from "react";
 import { getAllDeal } from "../_api/AuthService";
+import Loading from "../_components/Loading";
 
 const Deals = () => {
   const [dataDeals, setDataDeals] = useState<any>({});
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(5);
   const [data, setData] = useState<any>({ page: 1, size: 5, data_type: "onSale" });
-
+  const [loading, setLoading] = useState<boolean>();
   useEffect(() => {
     (async () => {
+      setLoading(true);
       const res = await getAllDeal(data);
-      setDataDeals(res?.data);
+      if (res) {
+        setLoading(false);
+        setDataDeals(res?.data);
+      }
+      setLoading(false);
     })();
   }, [data]);
-  console.log("dataDeals", dataDeals);
+
   const payloadData = (value: any) => {
     setData((prevDataUser: any) => {
       return {
@@ -66,6 +72,7 @@ const Deals = () => {
 
   return (
     <>
+      {loading && <Loading />}
       <Tabs defaultActiveKey={dataTab[0].name} onChange={handleTabChange}>
         {dataTab?.map((e: any) => (
           <TabPane tab={e.name} key={e.key}>

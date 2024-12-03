@@ -7,13 +7,21 @@ import { useState } from "react";
 import type { ProgressProps } from "antd";
 import ModalCommit from "./modalCommit";
 import ModalView from "./modalView";
+import { getDetailDeal } from "@/app/_api/AuthService";
 
 export default function ProductDetail({ data }: any) {
   const [openView, setOpenView] = useState<boolean>(false);
   const [openCommit, setOpenCommit] = useState<boolean>(false);
-
+  const [dataDetail, setDataDetail] = useState<any>();
   const showView = () => {
-    setOpenView(true);
+    (async () => {
+      const res = await getDetailDeal(data?.deal_id);
+      if (res) {
+        setOpenView(true);
+        setDataDetail(res.data);
+      } else {
+      }
+    })();
   };
   const onCloseView = () => {
     setOpenView(false);
@@ -93,7 +101,7 @@ export default function ProductDetail({ data }: any) {
           />
         </div>
       </div>
-      <ModalView onClose={onCloseView} openView={openView} dealId={data?.deal_id} />
+      <ModalView onClose={onCloseView} openView={openView} dataDetail={dataDetail} />
       <ModalCommit onClose={onCloseCommit} openCommit={openCommit} />
     </Col>
   );

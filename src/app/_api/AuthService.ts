@@ -13,5 +13,5 @@ export const getInfoUser = () => {
 };
 
 export const getDetailDeal = (payload: any) => {
-  return http.get(`/deal/get-deal-detail/${payload}`);
+  return http.get(`/deal/get-info/${payload}`);
 };
