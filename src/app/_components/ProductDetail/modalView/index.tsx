@@ -61,7 +61,7 @@ export default function ModalView({ onClose, onClick, openView, dataDetail }: an
                     <span className={`${styles.subText} ${styles.regular16}`}>UPC</span>
                   </Col>
                   <Col xs={14} lg={14}>
-                    <span className={styles.regular16}>194252818381</span>
+                    <span className={styles.regular16}>{dataDetail?.item.upc}</span>
                   </Col>
                 </Row>
               </Col>
@@ -81,7 +81,7 @@ export default function ModalView({ onClose, onClick, openView, dataDetail }: an
                     <span className={`${styles.subText} ${styles.regular16}`}>Model</span>
                   </Col>
                   <Col xs={14} lg={14}>
-                    <span className={styles.regular16}>MME73AM/A</span>
+                    <span className={styles.regular16}>{dataDetail?.item.item_model}</span>
                   </Col>
                 </Row>
               </Col>
@@ -142,7 +142,7 @@ export default function ModalView({ onClose, onClick, openView, dataDetail }: an
                               <span className={`${styles.subText} ${styles.regular16}`}>UPC</span>
                             </Col>
                             <Col xs={17} lg={17}>
-                              <span className={styles.regular16}>194252818381</span>
+                              <span className={styles.regular16}>{dataDetail?.item.upc}</span>
                             </Col>
                           </Row>
                         </Col>
@@ -162,7 +162,9 @@ export default function ModalView({ onClose, onClick, openView, dataDetail }: an
                               <span className={`${styles.subText} ${styles.regular16}`}>Model</span>
                             </Col>
                             <Col xs={17} lg={17}>
-                              <span className={styles.regular16}>MME73AM/A</span>
+                              <span className={styles.regular16}>
+                                {dataDetail?.item.item_model}
+                              </span>
                             </Col>
                           </Row>
                         </Col>
