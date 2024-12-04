@@ -15,3 +15,7 @@ export const getInfoUser = () => {
 export const getDetailDeal = (payload: any) => {
   return http.get(`/deal/get-info/${payload}`);
 };
+
+export const postSaveCommitments = (payload: any) => {
+  return http.post(`/commitment/save-commitments`, payload);
+};

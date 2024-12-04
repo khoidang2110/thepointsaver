@@ -96,6 +96,13 @@ $gray1: rgb(175, 175, 175);
     }
   }
 }
+
+.subTextInfo {
+  display: block;
+  font-size: 12px;
+  text-align: center;
+  font-weight: 600;
+}
 .button {
   display: flex;
   justify-content: space-between;

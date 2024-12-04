@@ -3,8 +3,6 @@ import { Col, Flex, Modal, Row, Progress, InputNumber } from "antd";
 import { ButtonCus } from "../ButtonCus";
 import styles from "./styles.module.scss";
 import { useState } from "react";
-
-import type { ProgressProps } from "antd";
 import ModalCommit from "./modalCommit";
 import ModalView from "./modalView";
 import { getDetailDeal } from "@/app/_api/AuthService";
@@ -13,11 +11,15 @@ export default function ProductDetail({ data }: any) {
   const [openView, setOpenView] = useState<boolean>(false);
   const [openCommit, setOpenCommit] = useState<boolean>(false);
   const [dataDetail, setDataDetail] = useState<any>();
-  const showView = () => {
+  const showView = (value: string) => {
     (async () => {
       const res = await getDetailDeal(data?.deal_id);
       if (res) {
-        setOpenView(true);
+        if (value == "view") {
+          setOpenView(true);
+        } else {
+          setOpenCommit(true);
+        }
         setDataDetail(res.data);
       } else {
       }
@@ -26,11 +28,75 @@ export default function ProductDetail({ data }: any) {
   const onCloseView = () => {
     setOpenView(false);
   };
-  const showCommit = () => {
-    setOpenCommit(true);
-  };
+
   const onCloseCommit = () => {
     setOpenCommit(false);
+  };
+
+  const btnFooterRender = () => {
+    if (data?.buyer_commitments > 0) {
+      return (
+        <Row justify="space-between" gutter={[16, 16]} align={"middle"} style={{ marginTop: 10 }}>
+          <Col span={7}>
+            <span className={styles.subTextInfo}>Committed</span>
+            <span className={styles.subTextInfo}>QTY: {data?.buyer_commitments || 0}</span>
+          </Col>
+          <Col span={7}>
+            <span className={styles.subTextInfo}>Fulfilled</span>
+            <span className={styles.subTextInfo}>QTY: {data?.fulfilled_commitments || 0}</span>
+          </Col>
+          <Col span={10}>
+            {data?.commit_limit > data?.commit_count ? (
+              <ButtonCus
+                onClick={() => showView("view")}
+                style={{ width: "100%", borderRadius: 20, padding: 14 }}
+                color="primary"
+                variant="outlined"
+                text="View deal"
+              />
+            ) : (
+              <ButtonCus
+                disabled
+                style={{ width: "100%", borderRadius: 20, padding: 14 }}
+                color="primary"
+                variant="solid"
+                text="Full"
+              />
+            )}
+          </Col>
+        </Row>
+      );
+    } else {
+      return (
+        <div className={styles.button}>
+          {data?.commit_limit > data?.commit_count ? (
+            <ButtonCus
+              onClick={() => showView("commit")}
+              style={{ width: "48%", borderRadius: 20, padding: 14 }}
+              color="primary"
+              variant="solid"
+              text="Commit"
+            />
+          ) : (
+            <ButtonCus
+              disabled
+              style={{ width: "48%", borderRadius: 20, padding: 14 }}
+              color="primary"
+              variant="solid"
+              text="Full"
+            />
+          )}
+
+          <ButtonCus
+            onClick={() => showView("view")}
+            style={{ width: "48%", borderRadius: 20, padding: 14 }}
+            color="primary"
+            variant="outlined"
+            text="View deal"
+          />
+        </div>
+      );
+    }
   };
 
   return (
@@ -48,7 +114,7 @@ export default function ProductDetail({ data }: any) {
         className={styles.formProduct}
         style={{ borderTop: data?.tag ? `4px solid red` : "none" }}
       >
-        <div onClick={showView} className={styles.boxImg}>
+        <div onClick={() => showView("view")} className={styles.boxImg}>
           <img src={data?.item?.item_image || "/nodata.svg"} />
           <div className={styles.tagProd}>
             {data?.rate < 0 ? (
@@ -59,7 +125,7 @@ export default function ProductDetail({ data }: any) {
           </div>
         </div>
         {/* <span className={styles.blackFri}>🔥 Black Friday</span> */}
-        <span onClick={showView} className={styles.textProduct}>
+        <span onClick={() => showView("view")} className={styles.textProduct}>
           {data?.item_title}
         </span>
         <Flex align="flex-end" justify="center">
@@ -84,25 +150,10 @@ export default function ProductDetail({ data }: any) {
           </div>
         )}
 
-        <div className={styles.button}>
-          <ButtonCus
-            onClick={showCommit}
-            style={{ width: "48%", borderRadius: 20, padding: 14 }}
-            color="primary"
-            variant="solid"
-            text="Commit"
-          />
-          <ButtonCus
-            onClick={showView}
-            style={{ width: "48%", borderRadius: 20, padding: 14 }}
-            color="primary"
-            variant="outlined"
-            text="View deal"
-          />
-        </div>
+        {btnFooterRender()}
       </div>
       <ModalView onClose={onCloseView} openView={openView} dataDetail={dataDetail} />
-      <ModalCommit onClose={onCloseCommit} openCommit={openCommit} />
+      <ModalCommit onClose={onCloseCommit} openCommit={openCommit} dataDetail={dataDetail} />
     </Col>
   );
 }

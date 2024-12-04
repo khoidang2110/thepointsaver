@@ -31,8 +31,7 @@ const layoutUnAuth = ({ children }: { children: React.ReactNode }) => {
       children: [
         { key: "5", label: "My Orders", name: "myorders" },
         { key: "6", label: "Orders Details", name: "detail" },
-        { key: "7", label: "Orders Analytics", name: "analytics" },
-        { key: "8", label: "Order Price Dispute", name: "disputes" },
+        { key: "7", label: "Order Price Dispute", name: "disputes" },
       ],
     },
   ];

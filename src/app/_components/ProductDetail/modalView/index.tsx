@@ -132,9 +132,7 @@ export default function ModalView({ onClose, onClick, openView, dataDetail }: an
                 <Col xs={24} sm={24} lg={19}>
                   <Row align={"middle"} gutter={[8, 8]}>
                     <Col xs={24} lg={19}>
-                      <span className={styles.nameItem}>
-                        Apple - Airpods (3Rd Generation) - White Magsafe
-                      </span>
+                      <span className={styles.nameItem}>{dataDetail?.item.item_title}</span>
                       <Row gutter={[8, 8]}>
                         <Col xs={14} lg={12}>
                           <Row>
