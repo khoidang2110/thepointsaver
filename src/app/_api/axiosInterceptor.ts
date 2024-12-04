@@ -29,9 +29,9 @@ const axiosInterceptor = {
       },
       (error: any) => {
         if (error.status === 401) {
-          // localStorage.removeItem("authUser");
-          // window.location.href = "/login";
-          // return Promise.reject(error);
+          localStorage.removeItem("authUser");
+          window.location.href = "/login";
+          return Promise.reject(error);
         }
         return error;
       },
