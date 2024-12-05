@@ -55,7 +55,7 @@ const Deals = () => {
     },
     {
       name: "Below Cost",
-      key: "below-cost",
+      key: "below_cost",
     },
     {
       name: "In Store",
