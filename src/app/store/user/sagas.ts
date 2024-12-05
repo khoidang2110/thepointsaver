@@ -1,7 +1,8 @@
-import { all, put, takeLatest } from "redux-saga/effects";
+import { all, put, takeLatest, call } from "redux-saga/effects";
 
-import { GET_DEAL_REQUEST } from "./actionTypes";
-import { getDealFailure, getDealSuccess } from "./actions";
+import { GET_DATA_DEAL_REQUEST, GET_DEAL_REQUEST } from "./actionTypes";
+import { getDataDealFailure, getDataDealSuccess, getDealFailure, getDealSuccess } from "./actions";
+import { getAllDeal } from "@/app/_api/AuthService";
 
 /*
   Worker Saga: Fired on FETCH_TODO_REQUEST action
@@ -9,8 +10,8 @@ import { getDealFailure, getDealSuccess } from "./actions";
 
 function* payloadGetDeal(payload: any): any {
   try {
-    console.log("payloadxx", payload);
-    yield put(getDealSuccess(payload));
+    const response = yield call(getAllDeal, payload.payload);
+    yield put(getDealSuccess(response?.data));
   } catch (e: any) {
     yield put(
       getDealFailure({
@@ -20,17 +21,21 @@ function* payloadGetDeal(payload: any): any {
   }
 }
 
-// function* fetchGetTaskSaga(action: any): any {
-//   const response = yield call(getListTask);
-//   if (response?.data.success) {
-//     yield put(postDoTaskSuccess(response?.data.data));
-//   } else {
-//     yield put(postDoTaskFailture(response?.data.message));
-//   }
-// }
+function* payloadDataGetDeal(payload: any): any {
+  try {
+    yield put(getDataDealSuccess(payload.payload));
+  } catch (e: any) {
+    yield put(
+      getDataDealFailure({
+        error: e.message,
+      }),
+    );
+  }
+}
 
 function* userSaga() {
   yield all([takeLatest(GET_DEAL_REQUEST, payloadGetDeal)]);
+  yield all([takeLatest(GET_DATA_DEAL_REQUEST, payloadDataGetDeal)]);
 }
 
 export default userSaga;

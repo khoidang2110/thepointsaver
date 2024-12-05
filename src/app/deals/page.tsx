@@ -2,35 +2,25 @@
 import { Col, Pagination, Row, Tabs } from "antd";
 import FilterOptions from "../_components/FilterOptions";
 import ProductDetail from "../_components/ProductDetail";
-import { useEffect, useState } from "react";
-import { getAllDeal } from "../_api/AuthService";
+import { useEffect, useRef, useState } from "react";
 import Loading from "../_components/Loading";
+import { useDispatch, useSelector } from "react-redux";
+import { getDataDealRequest, getDealRequest } from "../store/user/actions";
 
 const Deals = () => {
-  const [dataDeals, setDataDeals] = useState<any>({});
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(5);
-  const [data, setData] = useState<any>({ page: 1, size: 5, data_type: "onSale" });
   const [loading, setLoading] = useState<boolean>();
+  const dispatch = useDispatch();
+  const dataDeals = useSelector((state: any) => state.user.payloadDeal);
+  const dataResDeals = useSelector((state: any) => state.user.dataDeal);
+
   useEffect(() => {
-    (async () => {
-      setLoading(true);
-      const res = await getAllDeal(data);
-      if (res) {
-        setLoading(false);
-        setDataDeals(res?.data);
-      }
-      setLoading(false);
-    })();
-  }, [data]);
+    dispatch(getDealRequest(dataDeals));
+  }, [dataDeals]);
 
   const payloadData = (value: any) => {
-    setData((prevDataUser: any) => {
-      return {
-        ...prevDataUser, // Spread the previous dataUser values
-        ...value, // Merge in the new data
-      };
-    });
+    dispatch(getDataDealRequest(value));
   };
 
   const handlePageChange = (page: number, size: number) => {
@@ -40,10 +30,17 @@ const Deals = () => {
   };
 
   const onSearch = (value: any) => {
-    payloadData({ optional: value });
+    payloadData({ key: value });
   };
   const onChange = (key: any, value: any) => {
-    payloadData({ [key]: value });
+    if (key == "slider") {
+      const minValue = Math.min(...value);
+      const maxValue = Math.max(...value);
+      payloadData({ price_min: minValue, price_max: maxValue });
+      return;
+    } else {
+      payloadData({ [key]: value });
+    }
   };
 
   const { TabPane } = Tabs;
@@ -58,12 +55,12 @@ const Deals = () => {
     },
     {
       name: "Below Cost",
-      key: "below_cost",
+      key: "below-cost",
     },
-    // {
-    //   name: "In Store",
-    //   key: "inStore",
-    // },
+    {
+      name: "In Store",
+      key: "in_store",
+    },
     {
       name: "All Active",
       key: "active",
@@ -78,8 +75,8 @@ const Deals = () => {
           <TabPane tab={e.name} key={e.key}>
             <FilterOptions onSearch={onSearch} onChange={onChange} />
             <Row gutter={[16, 16]}>
-              {dataDeals?.deals?.length > 0 &&
-                dataDeals.deals?.map((item: any, i: any) => (
+              {dataResDeals?.deals?.length > 0 &&
+                dataResDeals.deals?.map((item: any, i: any) => (
                   <Col key={i.toString()} xs={24} sm={24} md={12} lg={8} xl={6}>
                     <ProductDetail data={item} />
                   </Col>
@@ -90,7 +87,7 @@ const Deals = () => {
               align="end"
               current={currentPage}
               pageSize={pageSize}
-              total={dataDeals?.total_count}
+              total={dataResDeals?.total_count}
               onChange={handlePageChange}
               showSizeChanger
               pageSizeOptions={["5", "10", "20", "50"]}

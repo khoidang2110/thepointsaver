@@ -21,15 +21,15 @@ export default function FilterOptions({ onSearch, onChange }: any) {
             <img src="https://buyinggroup.com/static/media/sorting-icon.f73dcc85.svg" />
           </div>
           <Select
-            onChange={(value) => onChange("price", value)}
+            onChange={(value) => onChange("short", value)}
             dropdownStyle={{
               width: "fit-content",
             }}
           >
-            <Select.Option value="descPrice">Highest to Lowest Price</Select.Option>
-            <Select.Option value="ascPrice">Lowest to Highest Price</Select.Option>
-            <Select.Option value="descComm">Highest to Lowest Comm.</Select.Option>
-            <Select.Option value="ascComm">Lowest to Highest Comm.</Select.Option>
+            <Select.Option value="price_min">Highest to Lowest Price</Select.Option>
+            <Select.Option value="price_max">Lowest to Highest Price</Select.Option>
+            <Select.Option value="comm_min">Highest to Lowest Comm.</Select.Option>
+            <Select.Option value="comm_max">Lowest to Highest Comm.</Select.Option>
           </Select>
         </Flex>
       </Col>
@@ -71,17 +71,18 @@ export default function FilterOptions({ onSearch, onChange }: any) {
           </div>
           <Select
             dropdownStyle={{ width: "fit-content" }}
-            onChange={(value) => onChange("isFull", value)}
+            onChange={(value) => onChange("full_commitment", value)}
           >
             <Select.Option value="all">All</Select.Option>
-            <Select.Option value="yes">Yes</Select.Option>
-            <Select.Option value="no">No</Select.Option>
+            <Select.Option value="true">Yes</Select.Option>
+            <Select.Option value="false">No</Select.Option>
           </Select>
         </Flex>
       </Col>
       <Col xs={12} lg={4}>
         <Slider
-          onChangeComplete={(value) => onChange("slider", value * 100)}
+          range
+          onChangeComplete={(value: any) => onChange("slider", value)}
           marks={marks}
           tooltip={{
             formatter,

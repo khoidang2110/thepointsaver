@@ -13,7 +13,7 @@ const Loading = () => {
         height: "100%",
         width: "100%",
         zIndex: 10,
-        backgroundColor: "#f0f2f5", // Optional: a light background for better visibility
+        minHeight: 150,
       }}
     >
       <Spin size="large" tip="Loading..." />

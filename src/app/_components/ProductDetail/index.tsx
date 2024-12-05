@@ -6,11 +6,13 @@ import { useState } from "react";
 import ModalCommit from "./modalCommit";
 import ModalView from "./modalView";
 import { getDetailDeal } from "@/app/_api/AuthService";
+import { useDispatch } from "react-redux";
 
 export default function ProductDetail({ data }: any) {
   const [openView, setOpenView] = useState<boolean>(false);
   const [openCommit, setOpenCommit] = useState<boolean>(false);
   const [dataDetail, setDataDetail] = useState<any>();
+
   const showView = (value: string) => {
     (async () => {
       const res = await getDetailDeal(data?.deal_id);
@@ -152,7 +154,15 @@ export default function ProductDetail({ data }: any) {
 
         {btnFooterRender()}
       </div>
-      <ModalView onClose={onCloseView} openView={openView} dataDetail={dataDetail} />
+      <ModalView
+        onClick={() => {
+          onCloseView();
+          showView("commit");
+        }}
+        onClose={onCloseView}
+        openView={openView}
+        dataDetail={dataDetail}
+      />
       <ModalCommit onClose={onCloseCommit} openCommit={openCommit} dataDetail={dataDetail} />
     </Col>
   );

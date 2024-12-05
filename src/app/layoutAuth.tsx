@@ -103,8 +103,8 @@ const layoutUnAuth = ({ children }: { children: React.ReactNode }) => {
         },
       }}
     >
-      <ToastContainer />
       <Layout style={{ minHeight: "100vh" }}>
+        <ToastContainer />
         <HeaderAuth showDrawer={showDrawer} collapsed={collapsed} setCollapsed={setCollapsed} />
         <Layout style={{ marginTop: 64 }}>
           {size.width > 900 ? (
