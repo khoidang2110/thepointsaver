@@ -1,26 +1,25 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Flex, Table } from "antd";
 import type { TableColumnsType, TableProps } from "antd";
 import styles from "./styles.module.scss";
 import { Tools } from "../Tools";
 import "../styles.scss";
+import { useDispatch, useSelector } from "react-redux";
+import { getCommitmentsRequest } from "@/app/store/user/actions";
 
 interface DataType {
   key: React.Key;
-  deal: string;
-  status: string;
-  price: number;
-  comm: number;
+  commitment_id: string;
   count: number;
-  fulfilled: number;
-  img: string;
-  sku: string;
-  dealId: string;
-  commitId: string;
+  created_at: string;
+  deal_id: string;
+  end_date: string;
+  item_model: string;
+  item_title: string;
+  price: number;
+  status: string;
   total: number;
-  createDate: string;
-  expiryDay: string;
 }
 
 const columns: TableColumnsType<DataType> = [
@@ -29,10 +28,10 @@ const columns: TableColumnsType<DataType> = [
     dataIndex: "deal",
     width: "500px",
     sorter: (a, b) => {
-      if (a.deal < b.deal) {
+      if (a.deal_id < b.deal_id) {
         return -1;
       }
-      if (a.deal > b.deal) {
+      if (a.deal_id > b.deal_id) {
         return 1;
       }
       return 0;
@@ -40,23 +39,23 @@ const columns: TableColumnsType<DataType> = [
     render: (text, record) => {
       return (
         <Flex align="center">
-          <div className={styles.boxImg}>
+          {/* <div className={styles.boxImg}>
             <img src={record.img} />
-          </div>
+          </div> */}
           <div className={styles.info}>
-            <span className={styles.mainTextTable}>{record.deal}</span>
-            <Flex className={styles.item}>
+            <span className={styles.mainTextTable}>{record.item_title}</span>
+            {/* <Flex className={styles.item}>
               <span className={styles.subTextTable}>SKU</span>
               <span className={styles.mainTextTable}>{record.sku}</span>
-            </Flex>
+            </Flex> */}
             <Flex>
               <Flex className={`${styles.item} ${styles.mr10}`}>
                 <span className={styles.subTextTable}>Deal Id</span>
-                <span>{record.dealId}</span>
+                <span>{record.deal_id}</span>
               </Flex>
               <Flex className={styles.item}>
                 <span className={styles.subTextTable}>Comm. Id</span>
-                <span>{record.commitId}</span>
+                <span>{record.commitment_id}</span>
               </Flex>
             </Flex>
           </div>
@@ -96,33 +95,40 @@ const columns: TableColumnsType<DataType> = [
     render: (text, record) => {
       return (
         <>
-          <span>{record?.price}</span>
+          <span>${record?.price}</span>
           <div className={styles.itemCommit}>
-            <span className={styles.nameItem}>Fulfilled</span>
-            <span>{record?.fulfilled}</span>
+            {/* <span className={styles.nameItem}>Fulfilled</span>
+            <span>{record?.fulfilled}</span> */}
           </div>
         </>
       );
     },
   },
-  {
-    title: "Comm.",
-    dataIndex: "comm",
-    sorter: (a, b) => a.comm - b.comm,
-  },
+  // {
+  //   title: "Comm.",
+  //   dataIndex: "comm",
+  //   sorter: (a, b) => a.comm - b.comm,
+  // },
   {
     title: "Total",
     dataIndex: "total",
     sorter: (a, b) => a.total - b.total,
+    render: (text, record) => {
+      return (
+        <>
+          <span>${record?.total}</span>
+        </>
+      );
+    },
   },
   {
     title: "Create Date",
-    dataIndex: "createDate",
+    dataIndex: "created_at",
     sorter: (a, b) => {
-      if (a.createDate < b.createDate) {
+      if (a.created_at < b.created_at) {
         return -1;
       }
-      if (a.createDate > b.createDate) {
+      if (a.created_at > b.created_at) {
         return 1;
       }
       return 0;
@@ -130,12 +136,12 @@ const columns: TableColumnsType<DataType> = [
   },
   {
     title: "Expiry Day",
-    dataIndex: "expiryDay",
+    dataIndex: "end_date",
     sorter: (a, b) => {
-      if (a.expiryDay < b.expiryDay) {
+      if (a.end_date < b.end_date) {
         return -1;
       }
-      if (a.expiryDay > b.expiryDay) {
+      if (a.end_date > b.end_date) {
         return 1;
       }
       return 0;
@@ -260,11 +266,19 @@ const DataTable: React.FC = () => {
       active: false,
     },
   ]);
+  const dispatch = useDispatch();
+  const dataCommit = useSelector((state: any) => state.user.dataCommit);
+  console.log("dataCommit", dataCommit);
+  useEffect(() => {
+    const payload = { page: 1, size: 10 };
+    dispatch(getCommitmentsRequest(payload));
+  }, []);
+
   return (
     <>
       <Table<DataType>
         columns={columns}
-        dataSource={data}
+        dataSource={dataCommit.commitments}
         onChange={onChange}
         showSorterTooltip={{ target: "sorter-icon" }}
         tableLayout="fixed"

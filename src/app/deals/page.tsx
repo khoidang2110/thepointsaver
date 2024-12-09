@@ -1,19 +1,33 @@
 "use client";
 import { Col, Pagination, Row, Tabs } from "antd";
-import FilterOptions from "../_components/FilterOptions";
-import ProductDetail from "../_components/ProductDetail";
-import { useEffect, useRef, useState } from "react";
-import Loading from "../_components/Loading";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import FilterOptions from "../_components/FilterOptions";
+import Loading from "../_components/Loading";
+import ProductDetail from "../_components/ProductDetail";
 import { getDataDealRequest, getDealRequest } from "../store/user/actions";
+import { getListStore } from "../_api/AuthService";
 
 const Deals = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(5);
   const [loading, setLoading] = useState<boolean>();
+  const [dataStore, setDataStore] = useState();
+
   const dispatch = useDispatch();
   const dataDeals = useSelector((state: any) => state.user.payloadDeal);
   const dataResDeals = useSelector((state: any) => state.user.dataDeal);
+
+  useEffect(() => {
+    payloadData({ data_type: localStorage.getItem("tabDeals") || "on_sale_now" });
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      const res = await getListStore();
+      setDataStore(res.data);
+    })();
+  }, []);
 
   useEffect(() => {
     dispatch(getDealRequest(dataDeals));
@@ -47,6 +61,7 @@ const Deals = () => {
   // Handle tab change
   const handleTabChange = (key: any) => {
     payloadData({ data_type: key });
+    localStorage.setItem("tabDeals", key);
   };
   const dataTab = [
     {
@@ -70,10 +85,13 @@ const Deals = () => {
   return (
     <>
       {loading && <Loading />}
-      <Tabs defaultActiveKey={dataTab[0].name} onChange={handleTabChange}>
+      <Tabs
+        defaultActiveKey={localStorage.getItem("tabDeals") || dataTab[0].key}
+        onChange={handleTabChange}
+      >
         {dataTab?.map((e: any) => (
           <TabPane tab={e.name} key={e.key}>
-            <FilterOptions onSearch={onSearch} onChange={onChange} />
+            <FilterOptions onSearch={onSearch} onChange={onChange} dataStore={dataStore} />
             <Row gutter={[16, 16]}>
               {dataResDeals?.deals?.length > 0 &&
                 dataResDeals.deals?.map((item: any, i: any) => (

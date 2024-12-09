@@ -2,8 +2,10 @@
 import { Col, Tabs, Flex, Input, Row, Select, Slider } from "antd";
 import styles from "./styles.module.scss";
 import "./styles.scss";
+import { memo, useEffect, useState } from "react";
+import { getListStore } from "@/app/_api/AuthService";
 
-export default function FilterOptions({ onSearch, onChange }: any) {
+const FilterOptions = ({ onSearch, onChange, dataStore }: any) => {
   const { Search } = Input;
   const formatter = (value: any) => `${value * 100}`;
   const marks = {
@@ -35,18 +37,19 @@ export default function FilterOptions({ onSearch, onChange }: any) {
       </Col>
       <Col xs={14} md={6} lg={4}>
         <Select
-          onChange={(value) => onChange("store", value)}
+          onChange={(value) => {
+            onChange("store", value);
+          }}
           style={{ width: "100%" }}
           showSearch
           placeholder="Stores"
-          filterOption={(input, option) =>
-            (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
-          }
-          options={[
-            { value: "1", label: "Jack" },
-            { value: "2", label: "Lucy" },
-            { value: "3", label: "Tom" },
-          ]}
+          // filterOption={(input, option) =>
+          //   (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
+          // }
+          options={dataStore?.map((store: any) => ({
+            value: store.store_id,
+            label: store.store_name,
+          }))}
         />
       </Col>
       <Col>
@@ -91,4 +94,6 @@ export default function FilterOptions({ onSearch, onChange }: any) {
       </Col>
     </Row>
   );
-}
+};
+
+export default FilterOptions;

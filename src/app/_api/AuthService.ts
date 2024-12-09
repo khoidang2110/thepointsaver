@@ -19,3 +19,11 @@ export const getDetailDeal = (payload: any) => {
 export const postSaveCommitments = (payload: any) => {
   return http.post(`/commitment/save-commitments`, payload);
 };
+
+export const getCommitments = (payload: any) => {
+  return http.post(`/commitment/get-commitments`, payload);
+};
+
+export const getListStore = () => {
+  return http.get(`/stores/get-list`);
+};
