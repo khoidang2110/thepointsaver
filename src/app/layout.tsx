@@ -26,5 +26,5 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
     </html>
   );
 };
-// K - reup github 05-12
+// K - reup github 09-12
 export default RootLayout;
